@@ -36,7 +36,6 @@
         <?php } ?>
     </div>
     <div class="container">
-    <button type="button" class="btn btn-secondary float-left ml-2 mt-2" onclick="goBack()">Back</button>
         <p>
             <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#ModalPengajuan"
             <?php 
@@ -46,7 +45,7 @@
             }
             ?>
             ><i class="fas fa-plus-circle"></i>
-              SUB 
+              STG 
             </button>
         </p>
         <br><br>
@@ -69,7 +68,7 @@
                 <tbody>
                     <?php 
                     $no = 1;
-                    foreach($sub as $data) { 
+                    foreach($stg as $data) { 
                     ?>
                     <tr>
                         <td><?php echo $no++ ?></td>
@@ -82,7 +81,7 @@
                         <td><?= $data->ajuanStatusAkhir ?></td>
                         <td>
                             <div class="btn-group">
-                                <a href="<?php echo base_url('pengajuansub/detail_pengajuansub/'.$data->ajuanSUBID);?>" class="btn btn-primary btn-sm"><i class="fas fa-info-circle"></i></a>
+                                <a href="<?php echo base_url('stg/detail_stg/'.$data->ajuanSUBID);?>" class="btn btn-primary btn-sm"><i class="fas fa-info-circle"></i></a>
                             </div>
                         </td> 
                     </tr>
@@ -99,12 +98,12 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle">Surat Uraian Banding</h5>
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Surat Gugat</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-                <form action="<?php echo base_url()?>/sub/saveSub" method="post">
+                <form action="<?php echo base_url()?>/stg/saveStg" method="post">
                 <div class="modal-body">
                     <div class="row">
                       <div class="col-md-6"> <!--Column 1-->
@@ -113,7 +112,7 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nomor</label>
-                            <div class="col-md-8"><input type="text" class="form-control" name="no_suratsub" placeholder="No.SUB" required></div>
+                            <div class="col-md-8"><input type="text" class="form-control" name="no_suratsub" placeholder="No.STG" required></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanggal</label>
@@ -127,8 +126,17 @@
                             </div>
                         </div>
                         
-                        <input type="hidden" name="vAlert1" value="" id="vAlert1">
-                        <input type="hidden" name="vAlert2" value="" id="vAlert2">
+
+                        <!-- <input type="text" name="type" value="STG"> -->
+                        <?php
+                        foreach($AlertSTG as $row){
+                        ?>
+                            <input type="hidden" name="vAlert1" value="<?= $row['SUBSTGalert1']?>">
+                            <input type="hidden" name="vAlert2" value="<?= $row['SUBSTGalert2'] ?>">
+                        <?php
+                        }
+                        ?>
+
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tgl Diterima Kanwil</label>
                             <div class="col-md-8">
@@ -146,8 +154,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">No Surat Banding</label>
-                            <div class="col-md-8"><input type="text" class="form-control" name="no_suratbanding" placeholder="No. Surat Banding" required></div>
+                            <label class="col-sm-3 col-form-label">No Surat Gugat</label>
+                            <div class="col-md-8"><input type="text" class="form-control" name="no_suratbanding" placeholder="No. Surat Gugat" required></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tgl Surat Banding</label>
@@ -199,7 +207,7 @@
                             <div class="col-md-8">
                                <select class="form-control" name="jenispajak" required>
                                     <option value="">No Selected</option>
-                                    <?php foreach($jenispajaksub as $row) {?>
+                                    <?php foreach($jenispajakstg as $row) {?>
                                     <option value="<?=$row['NamajenisPajak'] ?>"> <?= $row['NamajenisPajak'] ?></option>
                                     <?php }?>
                                 </select> 

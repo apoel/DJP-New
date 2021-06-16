@@ -39,7 +39,7 @@
         <!-- Data table --><br>
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">SUB <?= $detail_pengajuansub['ajuanSUBnamaWP'] ?></h3>
+            <h3 class="card-title">Detail STG <?= $detail_stg['ajuanSUBnamaWP'] ?></h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -53,25 +53,25 @@
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Nama WP</label>
                   <div class="col-sm-8">
-                    <input class="form-control" placeholder="<?= $detail_pengajuansub['ajuanSUBnamaWP'] ?>" value="<?= $detail_pengajuansub['ajuanSUBnamaWP'] ?>" disabled>
+                    <input class="form-control" placeholder="<?= $detail_stg['ajuanSUBnamaWP'] ?>" value="<?= $detail_stg['ajuanSUBnamaWP'] ?>" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">NPWP</label>
                   <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBNPWP'] ?>" class="form-control" id="ajuanSUBNPWP" placeholder="<?= $detail_pengajuansub['ajuanSUBNPWP'] ?>" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBNPWP'] ?>" class="form-control" id="ajuanSUBNPWP" placeholder="<?= $detail_stg['ajuanSUBNPWP'] ?>" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">NOP</label>
                   <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBNOP'] ?>" class="form-control" id="ajuanNPWP" placeholder="<?= $detail_pengajuansub['ajuanSUBNOP'] ?>" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBNOP'] ?>" class="form-control" id="ajuanNPWP" placeholder="<?= $detail_stg['ajuanSUBNOP'] ?>" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Kode KPP</label>
                   <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBkodeKPP'] ?>" class="form-control" placeholder="<?= $detail_pengajuansub['ajuanSUBkodeKPP'] ?>" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBkodeKPP'] ?>" class="form-control" placeholder="<?= $detail_stg['ajuanSUBkodeKPP'] ?>" disabled>
                   </div>
                 </div>
             
@@ -79,60 +79,56 @@
                   <label class="col-sm-4 col-form-label">Jenis Pajak</label>
                     
                     <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBjenisPajak'] ?>" class="form-control" placeholder="<?= $detail_pengajuansub['ajuanSUBjenisPajak'] ?>" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBjenisPajak'] ?>" class="form-control" placeholder="<?= $detail_stg['ajuanSUBjenisPajak'] ?>" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Masa Pajak</label>
                   <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBmasaPajak'] ?>" class="form-control" placeholder="<?= $detail_pengajuansub['ajuanSUBmasaPajak'] ?>" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBmasaPajak'] ?>" class="form-control" placeholder="<?= $detail_stg['ajuanSUBmasaPajak'] ?>" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Tahun Pajak</label>
                   <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBtahunPajak'] ?>" class="form-control" placeholder="<?= $detail_pengajuansub['ajuanSUBtahunPajak'] ?>" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBtahunPajak'] ?>" class="form-control" placeholder="<?= $detail_stg['ajuanSUBtahunPajak'] ?>" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Mata Uang</label>
                   <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBmataUang'] ?>" class="form-control" placeholder="<?= $detail_pengajuansub['ajuanSUBmataUang'] ?>" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBmataUang'] ?>" class="form-control" placeholder="<?= $detail_stg['ajuanSUBmataUang'] ?>" disabled>
                   </div>
                 </div>
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">No. Sengketa</label>
                   <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBNomorSengketa'] ?>" class="form-control" placeholder="<?= $detail_pengajuansub['ajuanSUBNomorSengketa'] ?>" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBNomorSengketa'] ?>" class="form-control" placeholder="<?= $detail_stg['ajuanSUBNomorSengketa'] ?>" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Nama PK</label>
                   <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBNamaPK'] ?>" class="form-control" placeholder="<?= $detail_pengajuansub['ajuanSUBNomorSengketa'] ?>" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBNamaPK'] ?>" class="form-control" placeholder="<?= $detail_stg['ajuanSUBNomorSengketa'] ?>" disabled>
+                  </div>
+                </div>
+                <hr>
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">No Surat Gugat</label>
+                  <div class="col-sm-8">
+                    <input type="text" value="<?= $detail_stg['ajuanSUBnoSuratBanding'] ?>" class="form-control" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-12 col-form-label"><u>Surat Banding</u></label>
-                    <div class="col-sm-8">
-                    </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">No Surat Banding</label>
+                  <label class="col-sm-4 col-form-label">Tgl Surat Gugat</label>
                   <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBnoSuratBanding'] ?>" class="form-control" disabled>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">Tgl Surat Banding</label>
-                  <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBtglSuratBanding'] ?>" class="form-control" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBtglSuratBanding'] ?>" class="form-control" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Tgl Terima PP</label>
                   <div class="col-sm-8">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBtglDiterimaPP'] ?>" class="form-control" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBtglDiterimaPP'] ?>" class="form-control" disabled>
                   </div>
                 </div>
                 <!-- /.form-group -->
@@ -140,65 +136,56 @@
               <!-- /.col -->
               <div class="col-md-6">
                 <!-- form-group -->
-                <div class="form-group row">
-                  <label class="col-sm-12 col-form-label"><u>Surat Permintaan Surat Uraian Banding</u></label>
-                  <div class="col-sm-8">
-                  </div>
-                </div>
+                
                 <div class="form-group row">
                   <label class="col-sm-5 col-form-label">No Surat Permintaan</label>
                   <div class="col-sm-7">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBnoSuratPermintaan'] ?>" class="form-control" placeholder="<?= $detail_pengajuansub['ajuanSUBnoSuratPermintaan'] ?>" disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanSUBnoSuratPermintaan'] ?>" class="form-control" placeholder="<?= $detail_stg['ajuanSUBnoSuratPermintaan'] ?>" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-5 col-form-label">Tgl Surat <i>(d/m/Y)</i></label>
                   <div class="col-sm-7">
-                    <input type="text" value="<?= date('d/m/Y',strtotime($detail_pengajuansub['ajuanSUBtglSuratPermintaan'])) ?>" class="form-control" disabled>
+                    <input type="text" value="<?= date('d/m/Y',strtotime($detail_stg['ajuanSUBtglSuratPermintaan'])) ?>" class="form-control" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-5 col-form-label">IKU 1 <i>(d/m/Y)</i></label>
                   <div class="col-sm-7">
-                    <input type="text" value="<?= date('d/m/Y',strtotime($detail_pengajuansub['ajuanSUBalert1'])) ?>" class="form-control" disabled>
+                    <input type="text" value="<?= date('d/m/Y',strtotime($detail_stg['ajuanSUBalert1'])) ?>" class="form-control" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-5 col-form-label">IKU 2 <i>(d/m/Y)</i></label>
                   <div class="col-sm-7">
-                    <input type="text" value="<?= date('d/m/Y',strtotime($detail_pengajuansub['ajuanSUBalert2'])) ?>" class="form-control" disabled>
+                    <input type="text" value="<?= date('d/m/Y',strtotime($detail_stg['ajuanSUBalert2'])) ?>" class="form-control" disabled>
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label class="col-sm-5 col-form-label">SUB/STG</label>
-                  <div class="col-sm-7">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanSUBjenisPermintaan'] ?>" class="form-control" placeholder="<?= $detail_pengajuansub['ajuanSUBjenisPermintaan'] ?>" disabled>
-                  </div>
-                </div>
+              
                 <div class="form-group row">
                   <label class="col-sm-5 col-form-label">Diterima Kanwil </label>
                   <div class="col-sm-7">
-                    <input type="text" value="<?= date('d/m/Y',strtotime($detail_pengajuansub['ajuanSUBtglDiterima'])) ?>" class="form-control" disabled>
+                    <input type="text" value="<?= date('d/m/Y',strtotime($detail_stg['ajuanSUBtglDiterima'])) ?>" class="form-control" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-5 col-form-label">Alert</label>
                   <div class="col-sm-7">
-                    <input type="text" value="<?= $detail_pengajuansub['status_open']?>" class="form-control" disabled>
+                    <input type="text" value="<?= $detail_stg['status_open']?>" class="form-control" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-5 col-form-label">Jangka Selesai (m)</label>
                   <div class="col-sm-7">
-                    <input type="text" value="<?= $detail_pengajuansub['jangka_waktu_selesai'] ?>" class="form-control" id="ajuanNPWP" disabled>
+                    <input type="text" value="<?= $detail_stg['jangka_waktu_selesai'] ?>" class="form-control" id="ajuanNPWP" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-5 col-form-label">Tanggal UB</label>
                   <div class="col-sm-7">
                     <?php 
-                    if($detail_pengajuansub['ajuanSUBtglUB']){
-                      $tgl_ub = date('d/m/Y',strtotime($detail_pengajuansub['ajuanSUBtglUB']));
+                    if($detail_stg['ajuanSUBtglUB']){
+                      $tgl_ub = date('d/m/Y',strtotime($detail_stg['ajuanSUBtglUB']));
                     }else{ $tgl_ub = "";}
                     ?>
                     <input type="text" value="<?= $tgl_ub ?>" class="form-control" id="ajuanNPWP"  disabled>
@@ -208,25 +195,7 @@
                 <div class="form-group row">
                   <label class="col-sm-5 col-form-label">Status Akhir</label>
                   <div class="col-sm-7">
-                    <input type="text" value="<?= $detail_pengajuansub['ajuanStatusAkhir'] ?>" class="form-control" id="ajuanNPWP"  disabled>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-5 col-form-label">No. Keputusan</label>
-                  <div class="col-sm-7">
-                    <input type="text" value="<?= $detail_pengajuansub['KEPnoKeputusan'] ?>" class="form-control" id="ajuanNPWP"  disabled>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-5 col-form-label">Amar Keputusan</label>
-                  <div class="col-sm-7">
-                    <input type="text" value="<?= $detail_pengajuansub['KEPjenis'] ?>" class="form-control" id="ajuanNPWP"  disabled>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-5 col-form-label">Nilai Ketetapan</label>
-                  <div class="col-sm-7">
-                    <input type="text" value="<?= number_format($detail_pengajuansub['KEPAmarKeputusan'],2) ?>" class="form-control" id="ajuanNPWP"  disabled>
+                    <input type="text" value="<?= $detail_stg['ajuanStatusAkhir'] ?>" class="form-control" id="ajuanNPWP"  disabled>
                   </div>
                 </div>
                 <!-- /.form-group -->
@@ -245,11 +214,11 @@
               $session = session();
               if($session->get('PENUserLevel')=="Level 2" OR $session->get('PENUserLevel')=="Level 3"){
                   echo "disabled";
-              }elseif($detail_pengajuansub['ajuanStatusAkhir'] != ""){
+              }elseif($detail_stg['ajuanStatusAkhir'] != ""){
                   echo "disabled";
               }
                 
-              // if($detail_pengajuansub['ajuanStatusAkhir'] != ""){
+              // if($detail_stg['ajuanStatusAkhir'] != ""){
               //     echo "disabled";
               // }
             ?>
@@ -258,13 +227,13 @@
             </button>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a data-target="#mObjekBanding" data-toggle="modal" id="myObjekBanding" href="#myObjekBanding" class="dropdown-item" ajuanIDSub='<?= $detail_pengajuansub['ajuanSUBID']?>'> <i class="fas fa-chevron-circle-right"></i> Objek Banding</a>
+              <a data-target="#mObjekBanding" data-toggle="modal" id="myObjekBanding" href="#myObjekBanding" class="dropdown-item" ajuanIDSub='<?= $detail_stg['ajuanSUBID']?>'> <i class="fas fa-chevron-circle-right"></i> Objek Gugat</a>
 
-              <a data-target="#mKetetapanPajakSub" data-toggle="modal" id="myKetetapanPajakSub" href="#myKetetapanPajakSub" class="dropdown-item" ajuanIDSub='<?= $detail_pengajuansub['ajuanSUBID']?>'> <i class="fas fa-chevron-circle-right"></i> Ketetapan Pajak</a>
+              <a data-target="#mKetetapanPajakSub" data-toggle="modal" id="myKetetapanPajakSub" href="#myKetetapanPajakSub" class="dropdown-item" ajuanIDSub='<?= $detail_stg['ajuanSUBID']?>'> <i class="fas fa-chevron-circle-right"></i> Ketetapan Pajak</a>
 
-              <a data-target="#mResponKantorWilayah" data-toggle="modal" class="dropdown-item" id="myResponKantorWilayah" href="#myResponKantorWilayah" ajuanIDSub='<?= $detail_pengajuansub['ajuanSUBID']?>'> <i class="fas fa-chevron-circle-right"></i> Respon Kanwil</a>
+              <a data-target="#mResponKantorWilayah" data-toggle="modal" class="dropdown-item" id="myResponKantorWilayah" href="#myResponKantorWilayah" ajuanIDSub='<?= $detail_stg['ajuanSUBID']?>'> <i class="fas fa-chevron-circle-right"></i> Respon Kantor Wilayah</a>
 
-              <a data-target="#mKetetapanUB" data-toggle="modal" class="dropdown-item" id="myKetetapanUB" href="#myKetetapanUB" ajuanIDSub='<?= $detail_pengajuansub['ajuanSUBID']?>'> <i class="fas fa-chevron-circle-right"></i> Ketetapan UB</a>
+              <a data-target="#mKetetapanUB" data-toggle="modal" class="dropdown-item" id="myKetetapanUB" href="#myKetetapanUB" ajuanIDSub='<?= $detail_stg['ajuanSUBID']?>'> <i class="fas fa-chevron-circle-right"></i> Ketetapan UB</a>
 
             </div>
 
@@ -275,7 +244,7 @@
     <!-- Manage Ketetapan Pajak-->
         <div class="card card-default">
           <div class="card-header">
-            <h3 class="card-title">Objek Banding </h3>
+            <h3 class="card-title">Objek Gugat</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -432,13 +401,13 @@
                   <tbody>
                     
                           <tr>
-                              <td><?= $detail_pengajuansub['ajuanSUBket'] ?></td>
-                              <td><?= $detail_pengajuansub['ajuanSUBnoUB'] ?></td>
+                              <td><?= $detail_stg['ajuanSUBket'] ?></td>
+                              <td><?= $detail_stg['ajuanSUBnoUB'] ?></td>
                               <td>
                                 <?php 
-                                if(isset($detail_pengajuansub['ajuanSUBtglUB']))
+                                if(isset($detail_stg['ajuanSUBtglUB']))
                                 { 
-                                  echo date('d/m/Y',strtotime($detail_pengajuansub['ajuanSUBtglUB']));
+                                  echo date('d/m/Y',strtotime($detail_stg['ajuanSUBtglUB']));
                                 }
 
                                 ?>
@@ -446,16 +415,16 @@
                               </td>
                               <td>
                                 <?php 
-                                  if(isset($detail_pengajuansub['ajuanSUBtglKirimUB']))
+                                  if(isset($detail_stg['ajuanSUBtglKirimUB']))
                                   { 
-                                    echo date('d/m/Y',strtotime($detail_pengajuansub['ajuanSUBtglKirimUB']));
+                                    echo date('d/m/Y',strtotime($detail_stg['ajuanSUBtglKirimUB']));
                                   }
                                 ?>
                                   
                               </td>
-                              <td><?= $detail_pengajuansub['ajuanSUBNamaPK'] ?></td>
-                              <td><?= $detail_pengajuansub['ajuanSUBjangkaWaktuSelesaiHari'] ?></td>
-                              <td><?= $detail_pengajuansub['ajuanSUBstatusArsip'] ?></td>
+                              <td><?= $detail_stg['ajuanSUBNamaPK'] ?></td>
+                              <td><?= $detail_stg['ajuanSUBjangkaWaktuSelesaiHari'] ?></td>
+                              <td><?= $detail_stg['ajuanSUBstatusArsip'] ?></td>
                           </tr>
                      
                   </tbody>
@@ -471,41 +440,37 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Objek Banding</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Objek Gugat</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="<?php echo base_url()?>/pengajuansub/saveObjekBanding" method="post">
+          <form action="<?php echo base_url()?>/stg/saveObjekGugat" method="post">
           <div class="modal-body">
                 <!-- Surat Tugas -->
                 <input type="hidden" name="ajuanIDSub" id="VajuanIDSub">
                 
-                <!-- Surat Banding didapat dari Ketetapan Pajak -->
                 <div class="form-group row">
-                    <label class="col-sm-5 col-form-label">Nomor Surat Banding</label>
+                    <label class="col-sm-5 col-form-label">Nomor Surat Gugat</label>
                     <div class="col-md-7">
-                      <select class="form-control" name="no_suratbanding" id="no_suratbanding" required>
-                          <option value="">No Selected</option>
-                          <?php foreach($list_suratbanding as $row) {?>
-                          <option value="<?=$row['KPid'] ?>"> <?= $row['KPNoKetetapan'] ?></option>
-                          <?php }?>
-                      </select>
-                       <input type="hidden" class="form-control" name="vKPNoKetetapan" id="id_KPNoKetetapan" readonly>
+                    <input type="text" class="form-control" name="nomor_gugat" placeholder="Nomor Surat Gugat" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-5 col-form-label">Tanggal Surat Banding</label>
+                    <label class="col-sm-5 col-form-label">Tanggal Surat Gugat</label>
                     <div class="col-md-7">
                       <div class="input-group date" id="reservationdate1" data-target-input="nearest">
-                            <input type="text" class="form-control" name="tgl_banding" id="id_tglbanding" readonly>
+                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate1" id="tgl_banding" name="tgl_gugat" value="<?= date('m/d/Y', time()); ?>" required/>
+                            <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-5 col-form-label">Nilai Keputusan</label>
                     <div class="col-md-7">
-                    <input type="text" class="form-control" name="nilai_keputusan" id="id_nilaikeputusan" readonly>
+                    <input type="text" class="form-control" name="nilai_keputusan" placeholder="Nilai Keputusan" required>
                     </div>
                 </div>
                 <!-- End Surat Tugas body -->
@@ -525,49 +490,46 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <!-- Data link dari keputusan -->
-            <!-- 
-            TETAPAJjenis = KEPjenis
-            TETAPAJnomorKeputusan = KEPnoKeputusan
-            TETAPAJtglKeputusan = KEPtglKeputusan
-            TETAPAJamarKeputusan = KEPAmarKeputusan
-             -->
-            <h5 class="modal-title" id="exampleModalLabel">Manage Ketetapan Pajak</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Manage Ketetapan Pajak SKP/STP/SPPT</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="<?php echo base_url()?>/pengajuansub/saveKetetapanPajakSub" method="post">
+          <form action="<?php echo base_url()?>/stg/saveKetetapanPajakSub" method="post">
           <div class="modal-body">
                 <input type="hidden" name="ajuanIDSub" id="TapPajakajuanIDSub">
                 <div class="form-group row">
                     <label class="col-sm-5 col-form-label">Jenis Ketetapan</label>
                     <div class="col-md-7">
-                      <select class="form-control" name="jenis_ketetapan" id="id_jenisketetapan" required>
+                      <select class="form-control" name="jenis_ketetapan" id="jenis_ketetapan" required>
                           <option value="">No Selected</option>
-                          <?php foreach($list_KPjenis as $row) {?>
-                          <option value="<?=$row['KPJKid'] ?>"> <?= $row['JKnama'] ?></option>
+                          <?php foreach($list_jenisketetapan as $row) {?>
+                          <option value="<?=$row['JKid'] ?>"> <?= $row['JKnama'] ?></option>
                           <?php }?>
                       </select>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-5 col-form-label">Nomor Keputusan</label>
+                    <label class="col-sm-5 col-form-label">Nomor Ketetapan</label>
                     <div class="col-md-7">
-                    <input type="text" class="form-control" name="nomor_keputusan" id="id_TAPnomorkeputusan" readonly>
+                    <input type="text" class="form-control" name="nomor_ketetapan" placeholder="Nomor Ketetapan" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-5 col-form-label">Tanggal Keputusan</label>
+                    <label class="col-sm-5 col-form-label">Tanggal Ketetapan</label>
                     <div class="col-md-7">
-                      <input type="text" class="form-control" name="tgl_keputusan" id="id_TAPtglkeputusan" readonly>
-                      
+                      <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate2" id="tgl_ketetapan" name="tgl_ketetapan" value="<?= date('m/d/Y', time()); ?>" required/>
+                            <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-5 col-form-label">Amar Keputusan</label>
+                    <label class="col-sm-5 col-form-label">Nilai Ketetapan</label>
                     <div class="col-md-7">
-                    <input type="text" class="form-control" name="nilai_keputusan" id="id_TAPnilaikeputusan" readonly>
+                    <input type="text" class="form-control" name="nilai_ketetapan" placeholder="Nilai Ketetapan" required>
                     </div>
                 </div>
                 <!-- End Surat Tugas body -->
@@ -587,30 +549,30 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Manage Respon Kanwil</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Manage Respon Kantor Wilayah</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="<?php echo base_url()?>/pengajuansub/saveResponKanwil" method="post">
+          <form action="<?php echo base_url()?>/stg/saveResponKanwil" method="post">
           <div class="modal-body">
                 <!-- Surat Tugas -->
                 <input type="hidden" name="ajuanIDSub" id="KanwilajuanIDSub">
                 <div class="form-group row">
                     <label class="col-sm-5 col-form-label">Jenis Tujuan</label>
                     <div class="col-md-7">
-                    <select class="form-control" name="jenis_tujuanRespon" id="id_jenistujuanKanwil" required>
-                            <option value="">No Selected</option>
-                            <?php foreach($list_tujuanRespon as $row) {?>
-                            <option value="<?=$row['RESPTUJid'] ?>"> <?= $row['RESPTUnama'] ?></option>
-                            <?php }?>
-                    </select>
+                        <select class="form-control" name="jenis_tujuanRespon" id="id_jenistujuanKanwil" required>
+                                <option value="">No Selected</option>
+                                <?php foreach($list_tujuanRespon as $row) {?>
+                                <option value="<?=$row['RESPTUJid'] ?>"> <?= $row['RESPTUnama'] ?></option>
+                                <?php }?>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-5 col-form-label">Nomor Surat</label>
                     <div class="col-md-7">
-                    <input type="text" class="form-control" name="nomor_surat" placeholder="Nomor Surat" required>
+                    <input type="text" class="form-control" name="nomor_surat" placeholder="Nomor Pengantar" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -658,13 +620,13 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="<?php echo base_url()?>/pengajuansub/saveKetetapanUB" method="post">
+          <form action="<?php echo base_url()?>/stg/saveKetetapanUB" method="post">
           <div class="modal-body">
                 <!-- Surat Tugas -->
               <input type="hidden" name="ajuanIDSub" id="UBajuanIDSub">
-              <input type="hidden" name="tgl_terima" value="<?= $detail_pengajuansub['ajuanSUBtglSuratPermintaan']?>">
-              <input type="hidden" name="alert1" value="<?= $detail_pengajuansub['ajuanSUBalert1'] ?>">
-              <input type="hidden" name="alert2" value="<?= $detail_pengajuansub['ajuanSUBalert2'] ?>">
+              <input type="hidden" name="tgl_terima" value="<?= $detail_stg['ajuanSUBtglSuratPermintaan']?>">
+              <input type="hidden" name="alert1" value="<?= $detail_stg['ajuanSUBalert1'] ?>">
+              <input type="hidden" name="alert2" value="<?= $detail_stg['ajuanSUBalert2'] ?>">
 
 
                 <div class="form-group row">
@@ -777,47 +739,6 @@
     $(document).on('click', '#myKetetapanUB', function() {
         var vajuanIDSub = $(this).attr("ajuanIDSub");
         $('#UBajuanIDSub').val(vajuanIDSub);
-    });
-    // Manage Dropdown Surat Banding
-    $('#no_suratbanding').change(function()
-    { 
-        var id=$(this).val();
-        //console.log(id);
-        $.ajax({
-            url : "<?php echo site_url('pengajuansub/getsbfrketetapan');?>",
-            method : "POST",
-            data : {id: id},
-            async : true,
-            dataType : 'json',
-            success: function(data){
-            //console.log(val(data[0].KEPAmarKeputusan));
-              $('#id_KPNoKetetapan').val(data[0].KPNoKetetapan);
-              $('#id_tglbanding').val(data[0].KPTgl);
-              $('#id_nilaikeputusan').val(data[0]. KPNilai);        
-            }
-        });
-        return false;
-    });
-    // Manage Ketetapan Pajak value from Keputusan
-    $('#id_jenisketetapan').change(function()
-    { 
-        var id=$(this).val();
-        //console.log(id);
-        $.ajax({
-            url : "<?php echo site_url('pengajuansub/getTAPKP');?>",
-            method : "POST",
-            data : {id: id},
-            async : true,
-            dataType : 'json',
-            success: function(data){
-            //console.log(val(data[0].KEPAmarKeputusan));
-             // $('#id_TAPAmarKeputusan').val(data[0].KPNoKetetapan);
-              $('#id_TAPnomorkeputusan').val(data[0].KPNoKetetapan);
-              $('#id_TAPtglkeputusan').val(data[0].KPTgl);
-              $('#id_TAPnilaikeputusan').val(data[0]. KPNilai);        
-            }
-        });
-        return false;
     });
 } );
 

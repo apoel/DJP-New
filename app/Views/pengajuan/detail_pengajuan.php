@@ -1,4 +1,4 @@
-<?php $request = \Config\Services::request(); ?>
+f<?php $request = \Config\Services::request(); ?>
 <?= $this->extend('base') ?>
 
 <?= $this->section('content') ?>
@@ -1103,12 +1103,12 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nomor Keputusan </th>
+                        <th>Nomor Keputusan</th>
                         <th>Tanggal Keputusan</th>
                         <th>Tanggal Kirim SK</th>
                         <th>Jangka Waktu Pengiriman (hari)</th>
+                        <th>Jenis Keputusan </th>
                         <th>Amar Keputusan </th>
-                        <th>Nilai Akhir Menurut Keputusan </th>
                         <?php
                         if($session->get('PENUserLevel')=="Editor"){
                         ?>
@@ -1130,8 +1130,8 @@
                           <td><?= $row['KEPtglKeputusan']?></td>
                           <td><?= $row['KEPtglKirimSK']?></td>
                           <td><?= $row['KEPjangkaKirim']?></td>
-                          <td><?= $row['KEPAmarKeputusan']?></td>
-                          <td><?= number_format($row['KEPNilaiAkhirKeputusan'],2)?></td>
+                          <td><?= $row['AmarKeputusan']?></td>
+                          <td><?= number_format($row['KEPAmarKeputusan'],2)?></td>
                           <?php
                           if($session->get('PENUserLevel')=="Editor"){
                           ?>
@@ -1463,7 +1463,9 @@
                 foreach($mketetapanpajak as $row){
                   $vNilai=$row['KPNilai'];
                 }
+                if(!isset($vNilai)){$vNilai = 0;}
                 ?>
+
                 <input type="hidden" name="NilaiAkhirKeputusan1" value="<?= $vNilai ?>">
                 
                 
@@ -1684,7 +1686,7 @@
                         <input type="text" class="form-control" name="tujuan_surat" id="id_tujuansurat" disabled>
                     </div>
                 </div>
-                =========================================================
+                <hr>
                 <!-- Data respon surat -->
                 <div class="form-group row">
                     <label class="col-sm-5 col-form-label">Status Respon</label>
@@ -1721,7 +1723,7 @@
                     <input type="text" class="form-control" name="keterangan_respon" placeholder="Keterangan" required>
                     </div>
                 </div>
-                =========================================================
+                <hr>
                 <div class="form-group row">
                     <label class="col-sm-5 col-form-label">Status Hadir</label>
                     <div class="col-md-7">
@@ -1916,7 +1918,7 @@
                       <input type="text" class="form-control" name="tgl_kirim" id="id_tglkirimspuh" disabled>
                     </div>
                 </div>
-                =========================================================
+                <hr>
                 <!-- Data respon surat -->
                 <div class="form-group row">
                     <label class="col-sm-5 col-form-label">Status Respon</label>
@@ -1953,7 +1955,7 @@
                     <input type="text" class="form-control" name="keterangan_respon" placeholder="Keterangan" required>
                     </div>
                 </div>
-                =========================================================
+                <hr>
                 <div class="form-group row">
                     <label class="col-sm-5 col-form-label">Status Hadir</label>
                     <div class="col-md-7">
@@ -2086,18 +2088,18 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-5 col-form-label">Amar Keputusan</label>
+                    <label class="col-sm-5 col-form-label">Jenis Keputusan</label>
                     <div class="col-md-7">
                     <select class="form-control" name="amar_keputusan" id="amar_keputusan" required>
                             <option value="">No Seletected</option>
                             <?php foreach($amar_keputusan as $row) { ?>
-                            <option value="<?= $row->AmarKeputusan  ?>"> <?= $row->AmarKeputusan ?></option>
+                            <option value="<?= $row->IdAmar  ?>"> <?= $row->AmarKeputusan ?></option>
                             <?php } ?>
                         </select>  
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-5 col-form-label">Nilai Akhir Keputusans</label>
+                    <label class="col-sm-5 col-form-label">Amar Keputusan</label>
                     <div class="col-md-7">
                     
                     <input type="text" class="form-control" name="NilaiAkhirKeputusan">

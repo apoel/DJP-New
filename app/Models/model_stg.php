@@ -2,23 +2,25 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class model_sub extends Model
+class model_stg extends Model
 {
 	
 	protected $table = "v_pengajuansub";
 
-	public function getSub($id = false)
+	public function getStg($id = false)
 	{
 		
 		if($id === false){
 			// $builder =  $this->db->table('pengajuan');
 			// return $builder->get();
 			return $this->db->table('v_pengajuansub')
+						->where('ajuanSUBjenisPermintaan','STG')
 						->orderBy('ajuanSUBID','DESC')
                         ->get();			 
 		}else{
 			return $this->table('v_pengajuansub')
                         ->where('ajuanSUBID', $id)
+                        ->where('ajuanSUBjenisPermintaan','STG')
                         ->get()
                         ->getRowArray();
 
@@ -38,13 +40,20 @@ class model_sub extends Model
  //        return $builder->get();
 	// }
 
-	public function get_jenispajaksub()
+	public function get_jenispajakstg()
 	{
 
-		$builder = $this->db->query("SELECT * FROM jenispajak WHERE NamajenisPajak NOT LIKE '%SURAT%'");
+		$builder = $this->db->query("SELECT * FROM jenispajak WHERE NamajenisPajak LIKE '%SUB%' OR NamajenisPajak LIKE '%STG%'");
 		return $builder->getResultArray();
 	}
 
+	public function getAlertSUBSTG($type)
+	{
+
+		$builder = $this->db->query("SELECT * FROM substg WHERE SUBSTGnama = '$type'");
+		return $builder->getResultArray();
+	}
+	
 	public function getJenisGugat()
 	{
 		$builder = $this->db->table('jenisgugatan');
@@ -66,20 +75,38 @@ class model_sub extends Model
                         ->getResultArray();
 	}
 
-	public function get_KetetapanPajakSub($id=false)
+	//getTujuanResponKanwil
+	public function getTujuanResponKanwil($id=false)
 	{
-		return $this->db->table('ketetapanpajaksub')
-                        ->where('TETAPAJajuanSUBID', $id)
+		 return $this->db->table('jenistujuanrespon')
                         ->get()
                         ->getResultArray();
 	}
 
+	public function get_KetetapanPajakSub($id=false)
+	{
+		$builder = $this->db->table('ketetapanpajaksub');
+		$builder->select('*');
+		$builder->join('jenisketetapan', 'jenisketetapan.JKid = ketetapanpajaksub.TETAPAJjenis');
+		$builder->where('TETAPAJajuanSUBID',$id);
+		$query = $builder->get();
+		return $query->getResultArray();
+
+	}
+
 	public function get_ResponKanwil($id=false)
 	{
-		return $this->db->table('responkanwil')
-                        ->where('RESPajuanSUBID', $id)
-                        ->get()
-                        ->getResultArray();
+		$builder = $this->db->table('responkanwil');
+		$builder->select('*');
+		$builder->join('jenistujuanrespon', 'jenistujuanrespon.RESPTUJid = responkanwil.RESPjenisTujuan');
+		$builder->where('RESPajuanSUBID',$id);
+		$query = $builder->get();
+		return $query->getResultArray();
+
+		// return $this->db->table('responkanwil')
+  //                       ->where('RESPajuanSUBID', $id)
+  //                       ->get()
+  //                       ->getResultArray();
 	}
 
 	public function savePengajuansub($data)
@@ -88,7 +115,7 @@ class model_sub extends Model
 		return $query;
 	}
 
-	public function saveObjekBanding($data)
+	public function saveObjekGugat($data)
 	{
 		$query = $this->db->table('objekdigugat')->insert($data);
 		return $query;
@@ -110,6 +137,23 @@ class model_sub extends Model
 	{
 		$query = $this->db->table('pengajuansub')->update($data,['ajuanSUBID' => $id]);
 		return $query;
+	}
+
+	
+	//function get
+
+	public function getJenisKetetapan($id=false)
+	{
+		 return $this->db->table('jenisketetapan')
+                        ->get()
+                        ->getResultArray();
+	}
+
+	function checkDataKanwil($id=false)
+	{
+		$result  = $this->db->query("SELECT count(`RESPid`) as Count FROM responkanwil where `RESPajuanSUBID` = $id");
+		$row = $result->getRow();
+		return $count = $row->Count;
 	}
 
 	// public function get_jenisPajak($id=false)

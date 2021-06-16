@@ -168,7 +168,7 @@
                     <label class="col-sm-3 col-form-label">Mata Uang</label>
                     <div class="col-md-8">
                         <select class="form-control" name="mata_uang" id="mata_uang" required>
-                            <option value="">No Seletected</option>
+                            <option value="">No Selected</option>
                             <option value="IDR">IDR</option>
                             <option value="SGD">SGD</option>
                             <option value="USD">USD</option>

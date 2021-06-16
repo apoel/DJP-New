@@ -55,13 +55,13 @@
                         </a>
                 </li>
                 <li class="nav-item">
-                        <a href="<?php echo base_url()."/sub"?>" class="nav-link">
+                        <a href="<?php echo base_url()."/pengajuansub"?>" class="nav-link">
                             <i class="nav-icon far fa-file-alt"></i>
                             <p>SUB</p>
                         </a>
                 </li>
                 <li class="nav-item">
-                        <a href="<?php echo base_url()."/pengajuansub"?>" class="nav-link">
+                        <a href="<?php echo base_url()."/stg"?>" class="nav-link">
                             <i class="nav-icon fas fa-file-invoice"></i>
                             <p>STG</p>
                         </a>

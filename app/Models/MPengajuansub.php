@@ -14,6 +14,7 @@ class MPengajuansub extends Model
 			// $builder =  $this->db->table('pengajuan');
 			// return $builder->get();
 			return $this->db->table('v_pengajuansub')
+						->where('ajuanSUBjenisPermintaan','SUB')
 						->orderBy('ajuanSUBID','DESC')
                         ->get();			 
 		}else{
@@ -24,6 +25,82 @@ class MPengajuansub extends Model
 
 		}
 
+	}
+
+	// public function get_SuratKeputusan($id=false)
+	// {
+	// 	return $this->db->table('keputusan')
+ //                        ->where('KEPid', $id)
+ //                        ->get()
+ //                        ->getResultArray();
+	// }
+
+	//getTujuanResponKanwil
+	public function getTujuanResponKanwil($id=false)
+	{
+		 return $this->db->table('jenistujuanrespon')
+                        ->get()
+                        ->getResultArray();
+	}
+	//Get KPjenis - t_ketetapanpajak
+	public function getKPjenis($id=false)
+	{
+        $builder = $this->db->table('ketetapanpajak');
+		$builder->select('*');
+		$builder->join('jenisketetapan', 'jenisketetapan.JKid = ketetapanpajak.KPJKid');
+		$query = $builder->get();
+		return $query->getResultArray();
+
+	}
+
+	//Get from t_ketetapanpajak
+	public function getSuratBanding($id=false)
+	{
+		 return $this->db->table('ketetapanpajak')
+                        ->get()
+                        ->getResultArray();
+	}
+
+	public function get_ListSuratKeputusan($id=false)
+	{
+		 return $this->db->table('keputusan')
+                        ->get()
+                        ->getResultArray();
+	}
+	
+
+	public function get_mwpkeputusan($id=false)
+	{
+		 return $this->db->table('v_kepsub')
+		 				->where('KEPid', $id)
+                        ->get()
+                        ->getResultArray();
+
+		// $builder = $this->db->table('keputusan');
+		// $builder->select('keputusan.*, pengajuan.*, amar_keputusan.*');
+		// $builder->join('pengajuan', 'pengajuan.ajuanId = keputusan.KEPajuanId');
+		// $builder->join('amar_keputusan','amar_keputusan.IdAmar = keputusan.KEPjenis');
+		// //$builder->where('keputusan.KEPid',$id);
+		// $query = $builder->get();
+		// return $query->getResultArray();
+	}
+
+	// Manage Ketetapan Pajak sub value from ketetapanpajak
+	public function get_mgetTAPKP($id=false)
+	{
+		 return $this->db->table('ketetapanpajak')
+		 				->where('KPJKid', $id)
+                        ->get()
+                        ->getResultArray();
+	}
+
+
+	public function get_msbfrketetapan($id=false)
+	{
+		 return $this->db->table('ketetapanpajak')
+		 				->where('KPid', $id)
+                        ->get()
+                        ->getResultArray();
 	}
 
 	public function getDetailPengajuan($id=false)
@@ -51,10 +128,10 @@ class MPengajuansub extends Model
 		return $builder->get();
 	}
 
-	public function get_substg()
+	public function getAlertSUBSTG($type)
 	{
 
-		$builder = $this->db->query("SELECT * FROM substg");
+		$builder = $this->db->query("SELECT * FROM substg WHERE SUBSTGnama = '$type'");
 		return $builder->getResultArray();
 	}
 
@@ -68,20 +145,31 @@ class MPengajuansub extends Model
 
 	public function get_KetetapanPajakSub($id=false)
 	{
-		return $this->db->table('ketetapanpajaksub')
-                        ->where('TETAPAJajuanSUBID', $id)
-                        ->get()
-                        ->getResultArray();
+		$builder = $this->db->table('ketetapanpajaksub');
+		$builder->select('*');
+		$builder->join('jenisketetapan', 'jenisketetapan.JKid = ketetapanpajaksub.TETAPAJjenis');
+		$builder->where('TETAPAJajuanSUBID',$id);
+		$query = $builder->get();
+		return $query->getResultArray();
 	}
 
+	//To view ResponKanwil
 	public function get_ResponKanwil($id=false)
 	{
-		return $this->db->table('responkanwil')
-                        ->where('RESPajuanSUBID', $id)
-                        ->get()
-                        ->getResultArray();
+		$builder = $this->db->table('responkanwil');
+		$builder->select('*');
+		$builder->join('jenistujuanrespon', 'jenistujuanrespon.RESPTUJid = responkanwil.RESPjenisTujuan');
+		$builder->where('RESPajuanSUBID',$id);
+		$query = $builder->get();
+		return $query->getResultArray();
+
+		// return $this->db->table('responkanwil')
+  //                       ->where('RESPajuanSUBID', $id)
+  //                       ->get()
+  //                       ->getResultArray();
 	}
 
+	
 	public function savePengajuansub($data)
 	{
 		$query = $this->db->table('pengajuansub')->insert($data);
@@ -110,6 +198,13 @@ class MPengajuansub extends Model
 	{
 		$query = $this->db->table('pengajuansub')->update($data,['ajuanSUBID' => $id]);
 		return $query;
+	}
+
+	function checkDataKanwil($id=false)
+	{
+		$result  = $this->db->query("SELECT count(`RESPid`) as Count FROM responkanwil where `RESPajuanSUBID` = $id");
+		$row = $result->getRow();
+		return $count = $row->Count;
 	}
 
 	// public function get_jenisPajak($id=false)

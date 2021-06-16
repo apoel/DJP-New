@@ -279,9 +279,19 @@ class Pengajuan extends Controller
 
 		// print_r($data);
 		// die();
-		$this->pengajuan->saveSuratTugas($data);
-		session()->setFlashData('success','Surat Tugas berhasil di entri');
-		return redirect()->to(base_url('pengajuan/detail_pengajuan/'.$id));
+
+		//Cek exist SuratTugas
+		$rowSuratTugas = $this->pengajuan->checkSuratTugas($id);
+
+		if($rowSuratTugas > 0){
+			session()->setFlashData('warning','Surat Tugas sudah ada !');
+			return redirect()->to(base_url('pengajuan/detail_pengajuan/'.$id));
+		}else{
+			$this->pengajuan->saveSuratTugas($data);
+			session()->setFlashData('success','Surat Tugas berhasil di entri');
+			return redirect()->to(base_url('pengajuan/detail_pengajuan/'.$id));
+		}
+		
 	}
 
 	public function saveFormalMatrik()
@@ -314,8 +324,8 @@ class Pengajuan extends Controller
 				'KEPtglKeputusan'			=> $Tgl_Keputusan,
 				'KEPtglKirimSK'				=> $Tgl_KirimSK,
 				'KEPjangkaKirim'			=> $selisih->d,
-				'KEPAmarKeputusan'			=> 'Menolak',
-				'KEPNilaiAkhirKeputusan'	=> $this->request->getPost('NilaiAkhirKeputusan1'),
+				'KEPjenis'					=> 1,
+				'KEPAmarKeputusan'			=> $this->request->getPost('NilaiAkhirKeputusan1'),
 			];
 
 			if($Tgl_Keputusan < $vAlert3){
@@ -417,8 +427,8 @@ class Pengajuan extends Controller
 				'KEPtglKeputusan'			=> $Tgl_Pencabutan,
 				'KEPtglKirimSK'				=> $Tgl_KirimSK,
 				'KEPjangkaKirim'			=> $selisih->d,
-				'KEPAmarKeputusan'			=> 'Dicabut oleh WP',
-				'KEPNilaiAkhirKeputusan'	=> $this->request->getPost('NilaiAkhirKeputusan1'),
+				'KEPjenis'					=> '5',
+				'KEPAmarKeputusan'			=> $this->request->getPost('NilaiAkhirKeputusan1'),
 		];
 
 		// print_r($data);
@@ -645,8 +655,8 @@ class Pengajuan extends Controller
 			'KEPtglKeputusan'			=> $Tgl_Keputusan,
 			'KEPtglKirimSK'				=> $Tgl_KirimSK,
 			'KEPjangkaKirim'			=> $selisih->d,
-			'KEPAmarKeputusan'			=> $this->request->getPost('amar_keputusan'),
-			'KEPNilaiAkhirKeputusan'	=> $this->request->getPost('NilaiAkhirKeputusan'),
+			'KEPjenis'					=> $this->request->getPost('amar_keputusan'),
+			'KEPAmarKeputusan'			=> $this->request->getPost('NilaiAkhirKeputusan'),
 		];
 
 		if($Tgl_Keputusan < $vAlert3){

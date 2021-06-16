@@ -147,6 +147,13 @@ class MPengajuan extends Model
 		return $query;
 	}
 
+	function checkSuratTugas($id=false)
+	{
+		$result  = $this->db->query("SELECT count(`STid`) as Count FROM surattugas where `STajuanId` = $id");
+		$row = $result->getRow();
+		return $count = $row->Count;
+	}
+
 	//Save after Manage
 	public function saveSuratTugas($data)
 	{
@@ -317,12 +324,7 @@ class MPengajuan extends Model
 		$builder = $this->db->query("SELECT st.STid, st.STajuanId, st.STnoSurat,st.STtglSurat,pf.PENid, pf.PENNama FROM surattugas st
 			LEFT JOIN penelaahref pf on st.STPenelaah = pf.PENid 
 			WHERE STajuanId = '$id'");
-		return $builder->getResultArray();
-
-		// return $this->db->table('surattugas')
-  //                       ->where('STajuanId', $id)
-  //                       ->get()
-  //                       ->getResultArray();
+			return $builder->getResultArray();
 	}
 
 	public function get_FormalMatrix($id=false)
@@ -395,12 +397,15 @@ class MPengajuan extends Model
                         ->getResultArray();
 	}
 
-	//Keputusan keberatan / non keberatan
+	//Keputusan keberatan / non keberatan = detail_pengajuan
 	public function get_Keputusan($id=false)
 	{
-		return $this->db->table('keputusan')
-                        ->where('KEPajuanId', $id)
-                        ->get()
-                        ->getResultArray();
+		$builder = $this->db->table('keputusan');
+		$builder->select('*');
+		$builder->join('amar_keputusan', 'amar_keputusan.IdAmar = keputusan.KEPjenis');
+		$builder->where('KEPajuanId', $id);
+		$query = $builder->get();
+		return $query->getResultArray();
+
 	}
 } 

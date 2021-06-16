@@ -36,7 +36,7 @@
         <?php } ?>
     </div>
     <div class="container">
-    <button type="button" class="btn btn-secondary float-left ml-2 mt-2" onclick="goBack()">Back</button>
+
         <p>
             <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#ModalPengajuan"
             <?php 
@@ -46,7 +46,7 @@
             }
             ?>
             ><i class="fas fa-plus-circle"></i>
-              Pengajuan SUB 
+             SUB 
             </button>
         </p>
         <br><br>
@@ -108,9 +108,7 @@
                 <div class="modal-body">
                     <div class="row">
                       <div class="col-md-6"> <!--Column 1-->
-                        <div class="form-group row">
-                        <label class="col-sm-12 col-form-label">Surat Permintaan Surat Uraian Banding</label>
-                        </div>
+                       
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nomor</label>
                             <div class="col-md-8"><input type="text" class="form-control" name="no_suratsub" placeholder="No.Surat Permintaan SUB" required></div>
@@ -126,21 +124,20 @@
                                 </div>
                             </div>
                         </div>
+                       
+                        <!-- <input type="text" name="type" value="SUB"> -->
+                        <?php
+                        foreach($AlertSub as $row){
+                        ?>
+                            <input type="hidden" name="vAlert1" value="<?= $row['SUBSTGalert1']?>">
+                            <input type="hidden" name="vAlert2" value="<?= $row['SUBSTGalert2'] ?>">
+                        <?php
+                        }
+                        ?>
+                        
+
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">SUB/STG</label>
-                            <div class="col-md-8">
-                                <select class="form-control" name="sub-stg" id="sub-stg" required>
-                                    <option value="">No Selected</option>
-                                    <?php foreach($substg as $row) {?>s
-                                    <option value="<?=$row['SUBSTGnama'] ?>" l_substg = "<?= $row['SUBSTGalert1']?>" l_substg2 = "<?= $row['SUBSTGalert2']?>"> <?= $row['SUBSTGnama'] ?></option>
-                                    <?php }?>
-                                </select>
-                            </div>
-                        </div>
-                        <input type="hidden" name="vAlert1" value="" id="vAlert1">
-                        <input type="hidden" name="vAlert2" value="" id="vAlert2">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Tgl Diterima Kanwil</label>
+                            <label class="col-sm-3 col-form-label">Diterima Kanwil</label>
                             <div class="col-md-8">
                                 <div class="input-group date" id="reservationdate1" data-target-input="nearest">
                                     <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate1" id="tgl_terimakanwil" name="tgl_terimakanwil" value="<?= date('m/d/Y', time()); ?>" required/>
@@ -181,59 +178,71 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <!-- /.form-group kiri -->
                       </div> <!--end div kolum kiri-->
                       <!-- /.col -->
+
                       <div class="col-md-6"> <!--Kolom kanan-->
                         <div class="form-group row">
-                            <label class="col-sm-12 col-form-label">Data WP</label>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama WP</label>
-                            <div class="col-md-8"><input type="text" class="form-control" name="nama_wp" placeholder="Nama WP" required></div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">NPWP</label>
-                            <div class="col-md-8"><input type="text" class="form-control" name="npwp" placeholder="NPWP" required></div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">NOP</label>
-                            <div class="col-md-8"><input type="text" class="form-control" name="nop" placeholder="NOP" required></div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Kode KPP</label>
-                            <div class="col-md-8"><input type="text" class="form-control" name="kode_kpp" placeholder="Kode KPP" required></div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Jenis Pajak</label>
+                            <label class="col-sm-3 col-form-label">No Keputusan</label>
                             <div class="col-md-8">
-                               <select class="form-control" name="jenispajak" required>
+                                <select class="form-control" name="no_suratkeputusan" id="no_suratkeputusan" required>
                                     <option value="">No Selected</option>
-                                    <?php foreach($jenispajaksub as $row) {?>
-                                    <option value="<?=$row['NamajenisPajak'] ?>"> <?= $row['NamajenisPajak'] ?></option>
+                                    <?php foreach($list_suratkeputusan as $row) {?>
+                                    <option value="<?=$row['KEPid'] ?>"> <?= $row['KEPnoKeputusan'] ?></option>
                                     <?php }?>
                                 </select> 
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Jenis Keputusan</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="amarkeputusan" id="id_jeniskeputusan" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Amar Keputusan</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="nilaikeputusan" id="id_amarkeputusan" disabled>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama WP</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="nama_wp" id="id_namawp" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">NPWP</label>
+                            <div class="col-md-8"><input type="text" class="form-control" name="npwp" id="id_npwp" readonly></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">NOP</label>
+                            <div class="col-md-8"><input type="text" class="form-control" name="nop" id="id_nop" readonly></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Kode KPP</label>
+                            <div class="col-md-8"><input type="text" class="form-control" name="kode_kpp" id="id_kodekpp" readonly></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Jenis Pajak</label>
+                            <div class="col-md-8"><input type="text" class="form-control" name="jenispajak" id="id_jenispajak" readonly></div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Masa Pajak</label>
-                            <div class="col-md-8"><input type="text" class="form-control" name="masa_pajak" placeholder="Masa Pajak"></div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="masa_pajak" id="id_masapajak" readonly>
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tahun Pajak</label>
-                            <div class="col-md-8"><input type="text" class="form-control" name="tahun_pajak" placeholder="Ex: 2005" required></div>
+                            <div class="col-md-8"><input type="text" class="form-control" name="tahun_pajak" id="id_tahunpajak" readonly></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Mata Uang</label>
-                            <div class="col-md-8">
-                                <select class="form-control" name="mata_uang" id="mata_uang" required>
-                                    <option value="">No Seletected</option>
-                                    <option value="IDR">IDR</option>
-                                    <option value="SGD">SGD</option>
-                                    <option value="USD">USD</option>
-                                    <option value="RM">RM</option>
-                                </select>
-                            </div>
+                            <div class="col-md-8"><input type="text" class="form-control" name="mata_uang" id="id_matauang" readonly></div>
                         </div>
                         
                       </div>
@@ -272,14 +281,14 @@
         "scrollX": false
     } );
     //JQuery substg
-    $(document).on('click', '#sub-stg', function() {
-            var vAlert1 = $(this).find('option:selected').attr("l_substg");
-            $('#vAlert1').val(vAlert1);   //id dari input type hidden
-    });
-    $(document).on('click', '#sub-stg', function() {
-            var vAlert2 = $(this).find('option:selected').attr("l_substg2");
-            $('#vAlert2').val(vAlert2);   //id dari input type hidden
-    });
+    // $(document).on('click', '#sub-stg', function() {
+    //         var vAlert1 = $(this).find('option:selected').attr("l_substg");
+    //         $('#vAlert1').val(vAlert1);   //id dari input type hidden
+    // });
+    // $(document).on('click', '#sub-stg', function() {
+    //         var vAlert2 = $(this).find('option:selected').attr("l_substg2");
+    //         $('#vAlert2').val(vAlert2);   //id dari input type hidden
+    // });
     //JQuery Jenis Pajak
     $(document).on('click', '#jenis_pajak', function() {
             var vjenis_pajak = $(this).find('option:selected').attr("l_jenispajak");
@@ -301,6 +310,43 @@
             // console.log(v_alert1);
             $('#valert1').val(v_alert1);   //id dari input type hidden
     });
+    // Manage Dropdown Surat Keputusan
+    $('#no_suratkeputusan').change(function()
+    { 
+        var id=$(this).val();
+        //console.log(id);
+        $.ajax({
+            url : "<?php echo site_url('pengajuansub/getwpfromkeputusan');?>",
+            method : "POST",
+            data : {id: id},
+            async : true,
+            dataType : 'json',
+            success: function(data){
+                //console.log(data);
+                // for(i=0; i< data.length; i++){
+                //     $('#id_amarkeputusan').val(data[i].AmarKeputusan);
+                //     $('#id_nilaikeputusan').val(data[i].KEPAmarKeputusan);
+                //     $('#id_namawp').val(data[i].ajuanNamaWP)
+                // }
+            //console.log(val(data[0].KEPAmarKeputusan));
+              $('#id_jeniskeputusan').val(data[0].ajuanJenisPemohon);
+              $('#id_amarkeputusan').val(data[0]. KEPAmarKeputusan);
+              $('#id_namawp').val(data[0].ajuanNamaWP);
+              $('#id_npwp').val(data[0].ajuanNPWP);
+
+              $('#id_nop').val(data[0].ajuanNOP);
+              $('#id_kodekpp').val(data[0].ajuanKodeKPP);
+              $('#id_jenispajak').val(data[0].ajuanJenisPajak);
+              $('#id_masapajak').val(data[0].ajuanMasaPajak);
+              $('#id_tahunpajak').val(data[0].ajuanTahunPajak);
+              $('#id_matauang ').val(data[0].ajuanMataUang);
+              
+            }
+        });
+        return false;
+    });
+    
+
     } );
 
     function goBack() {

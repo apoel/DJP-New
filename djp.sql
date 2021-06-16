@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2021 at 03:31 AM
+-- Generation Time: Jun 16, 2021 at 05:59 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `djp`
 --
-CREATE DATABASE IF NOT EXISTS `djp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
-USE `djp`;
 
 -- --------------------------------------------------------
 
@@ -29,7 +27,6 @@ USE `djp`;
 -- Table structure for table `amar_keputusan`
 --
 
-DROP TABLE IF EXISTS `amar_keputusan`;
 CREATE TABLE `amar_keputusan` (
   `IdAmar` int(11) NOT NULL,
   `AmarKeputusan` varchar(50) COLLATE utf8mb4_bin NOT NULL
@@ -40,8 +37,11 @@ CREATE TABLE `amar_keputusan` (
 --
 
 INSERT INTO `amar_keputusan` (`IdAmar`, `AmarKeputusan`) VALUES
-(1, 'Mengabulkan Sebagian'),
-(2, 'Menambah');
+(1, 'Menolak'),
+(2, 'Mengabulkan Sebagian'),
+(3, 'Mengabulkan Keseluruhan'),
+(4, 'Kesalahan Jumlah'),
+(5, 'Dicabut Oleh WP');
 
 -- --------------------------------------------------------
 
@@ -49,7 +49,6 @@ INSERT INTO `amar_keputusan` (`IdAmar`, `AmarKeputusan`) VALUES
 -- Table structure for table `departemen`
 --
 
-DROP TABLE IF EXISTS `departemen`;
 CREATE TABLE `departemen` (
   `id` int(11) NOT NULL,
   `nama` varchar(100) COLLATE utf8mb4_bin NOT NULL
@@ -71,7 +70,6 @@ INSERT INTO `departemen` (`id`, `nama`) VALUES
 -- Table structure for table `formatmatrik`
 --
 
-DROP TABLE IF EXISTS `formatmatrik`;
 CREATE TABLE `formatmatrik` (
   `FMid` int(11) NOT NULL,
   `FMajuanId` int(100) NOT NULL,
@@ -92,7 +90,6 @@ INSERT INTO `formatmatrik` (`FMid`, `FMajuanId`, `FMisFormal`, `FMtglMatrik`) VA
 -- Table structure for table `jenisekspedisi`
 --
 
-DROP TABLE IF EXISTS `jenisekspedisi`;
 CREATE TABLE `jenisekspedisi` (
   `JEid` int(11) NOT NULL,
   `JEnamaEkspedisi` varchar(150) NOT NULL
@@ -112,7 +109,6 @@ INSERT INTO `jenisekspedisi` (`JEid`, `JEnamaEkspedisi`) VALUES
 -- Table structure for table `jenisgugatan`
 --
 
-DROP TABLE IF EXISTS `jenisgugatan`;
 CREATE TABLE `jenisgugatan` (
   `GUGATid` int(11) NOT NULL,
   `GUGATjenis` varchar(50) COLLATE utf8mb4_bin NOT NULL
@@ -132,7 +128,6 @@ INSERT INTO `jenisgugatan` (`GUGATid`, `GUGATjenis`) VALUES
 -- Table structure for table `jenisketerangan`
 --
 
-DROP TABLE IF EXISTS `jenisketerangan`;
 CREATE TABLE `jenisketerangan` (
   `JKid` int(11) NOT NULL,
   `JKnama` varchar(250) NOT NULL
@@ -144,7 +139,6 @@ CREATE TABLE `jenisketerangan` (
 -- Table structure for table `jenisketetapan`
 --
 
-DROP TABLE IF EXISTS `jenisketetapan`;
 CREATE TABLE `jenisketetapan` (
   `JKid` int(11) NOT NULL,
   `JKnama` varchar(250) NOT NULL
@@ -165,7 +159,6 @@ INSERT INTO `jenisketetapan` (`JKid`, `JKnama`) VALUES
 -- Table structure for table `jenispajak`
 --
 
-DROP TABLE IF EXISTS `jenispajak`;
 CREATE TABLE `jenispajak` (
   `jnsPajakId` int(11) NOT NULL,
   `idJenisPemohon` int(11) NOT NULL,
@@ -185,7 +178,9 @@ INSERT INTO `jenispajak` (`jnsPajakId`, `idJenisPemohon`, `NamajenisPajak`, `ale
 (2, 2, 'Pasal 36 (1) huruf b UU KUP', '6', '5', '4', 'Ok'),
 (8, 2, 'Pasal 36 ayat (1) huruf a UU KUP', '6', '5', '4', 'Dari tanggal terima permohonan (LPAD) sampai dengan tanggal SK'),
 (9, 1, 'Pasal 15 UU PBB', '12', '11', '10', 'Dari tanggal terima pengajuan keberatan (LPAD) sampai dengan tanggal SK'),
-(15, 2, 'Pasal 36 ayat (1) huruf c UU KUP', '6', '5', '4', 'Dari tanggal terima permohonan (LPAD) sampai dengan tanggal SK');
+(15, 2, 'Pasal 36 ayat (1) huruf c UU KUP', '6', '5', '4', 'Dari tanggal terima permohonan (LPAD) sampai dengan tanggal SK'),
+(16, 1, 'SUB', '3', '2', '1', 'SUB'),
+(17, 1, 'STG', '1', '0.5', '0.25', 'STG');
 
 -- --------------------------------------------------------
 
@@ -193,7 +188,6 @@ INSERT INTO `jenispajak` (`jnsPajakId`, `idJenisPemohon`, `NamajenisPajak`, `ale
 -- Table structure for table `jenispemohon`
 --
 
-DROP TABLE IF EXISTS `jenispemohon`;
 CREATE TABLE `jenispemohon` (
   `idJenisPemohon` int(11) NOT NULL,
   `JenisPemohon` varchar(100) COLLATE utf8mb4_bin NOT NULL
@@ -215,11 +209,18 @@ INSERT INTO `jenispemohon` (`idJenisPemohon`, `JenisPemohon`) VALUES
 -- Table structure for table `jenistujuanrespon`
 --
 
-DROP TABLE IF EXISTS `jenistujuanrespon`;
 CREATE TABLE `jenistujuanrespon` (
   `RESPTUJid` int(11) NOT NULL,
   `RESPTUnama` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jenistujuanrespon`
+--
+
+INSERT INTO `jenistujuanrespon` (`RESPTUJid`, `RESPTUnama`) VALUES
+(1, 'Pengadilan Pajak'),
+(2, 'Kantor Pusat DJP');
 
 -- --------------------------------------------------------
 
@@ -227,7 +228,6 @@ CREATE TABLE `jenistujuanrespon` (
 -- Table structure for table `keputusan`
 --
 
-DROP TABLE IF EXISTS `keputusan`;
 CREATE TABLE `keputusan` (
   `KEPid` int(11) NOT NULL,
   `KEPajuanId` int(250) NOT NULL,
@@ -235,17 +235,17 @@ CREATE TABLE `keputusan` (
   `KEPtglKeputusan` date NOT NULL,
   `KEPtglKirimSK` date NOT NULL,
   `KEPjangkaKirim` int(100) NOT NULL,
-  `KEPAmarKeputusan` varchar(100) NOT NULL,
-  `KEPNilaiAkhirKeputusan` double NOT NULL
+  `KEPjenis` int(10) NOT NULL,
+  `KEPAmarKeputusan` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `keputusan`
 --
 
-INSERT INTO `keputusan` (`KEPid`, `KEPajuanId`, `KEPnoKeputusan`, `KEPtglKeputusan`, `KEPtglKirimSK`, `KEPjangkaKirim`, `KEPAmarKeputusan`, `KEPNilaiAkhirKeputusan`) VALUES
-(1, 2, '0101', '2021-06-01', '2021-06-02', 1, 'Menolak', 2000000),
-(3, 1, '0101-Dicabut', '2021-06-01', '2021-06-13', 12, 'Dicabut oleh WP', 3000000);
+INSERT INTO `keputusan` (`KEPid`, `KEPajuanId`, `KEPnoKeputusan`, `KEPtglKeputusan`, `KEPtglKirimSK`, `KEPjangkaKirim`, `KEPjenis`, `KEPAmarKeputusan`) VALUES
+(1, 2, '0101F', '2021-06-01', '2021-06-15', 14, 1, 2000000),
+(2, 1, '02PencabutanWP', '2021-06-01', '2021-06-15', 14, 5, 3000000);
 
 -- --------------------------------------------------------
 
@@ -253,7 +253,6 @@ INSERT INTO `keputusan` (`KEPid`, `KEPajuanId`, `KEPnoKeputusan`, `KEPtglKeputus
 -- Table structure for table `ketetapanpajak`
 --
 
-DROP TABLE IF EXISTS `ketetapanpajak`;
 CREATE TABLE `ketetapanpajak` (
   `KPid` int(11) NOT NULL,
   `KPajuanId` int(100) NOT NULL,
@@ -277,15 +276,24 @@ INSERT INTO `ketetapanpajak` (`KPid`, `KPajuanId`, `KPJKid`, `KPNoKetetapan`, `K
 -- Table structure for table `ketetapanpajaksub`
 --
 
-DROP TABLE IF EXISTS `ketetapanpajaksub`;
 CREATE TABLE `ketetapanpajaksub` (
   `TETAPAJid` int(11) NOT NULL,
   `TETAPAJajuanSUBID` int(250) NOT NULL,
   `TETAPAJjenis` varchar(250) NOT NULL,
-  `TETAPAJnomorKetetapan` varchar(100) NOT NULL,
-  `TETAPAJtglKetetapan` date NOT NULL,
-  `TETAPAJNilaiKetetapan` double NOT NULL
+  `TETAPAJnomorKeputusan` varchar(100) NOT NULL,
+  `TETAPAJtglKeputusan` date NOT NULL,
+  `TETAPAJamarKeputusan` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ketetapanpajaksub`
+--
+
+INSERT INTO `ketetapanpajaksub` (`TETAPAJid`, `TETAPAJajuanSUBID`, `TETAPAJjenis`, `TETAPAJnomorKeputusan`, `TETAPAJtglKeputusan`, `TETAPAJamarKeputusan`) VALUES
+(1, 1, '1', '01.TAP21', '2021-06-01', 3000000),
+(2, 1, '2', '01TAP', '2021-06-02', 2000000),
+(3, 2, '1', '01.TAP21', '2021-06-01', 3000000),
+(4, 3, '4', '0101.SQ', '2021-06-15', 1500000);
 
 -- --------------------------------------------------------
 
@@ -293,7 +301,6 @@ CREATE TABLE `ketetapanpajaksub` (
 -- Table structure for table `kpp`
 --
 
-DROP TABLE IF EXISTS `kpp`;
 CREATE TABLE `kpp` (
   `KPPid` int(11) NOT NULL,
   `KPPnama` varchar(250) NOT NULL
@@ -305,7 +312,6 @@ CREATE TABLE `kpp` (
 -- Table structure for table `laporanpenelitian`
 --
 
-DROP TABLE IF EXISTS `laporanpenelitian`;
 CREATE TABLE `laporanpenelitian` (
   `LPid` int(11) NOT NULL,
   `LPajuanId` int(100) NOT NULL,
@@ -328,7 +334,6 @@ INSERT INTO `laporanpenelitian` (`LPid`, `LPajuanId`, `LPnoLaporan`, `LPtglLapor
 -- Table structure for table `objekdigugat`
 --
 
-DROP TABLE IF EXISTS `objekdigugat`;
 CREATE TABLE `objekdigugat` (
   `OBJGUGATid` int(11) NOT NULL,
   `OBJGUGATajuanSUBID` int(100) NOT NULL,
@@ -338,13 +343,20 @@ CREATE TABLE `objekdigugat` (
   `OBJGUGATnilaiPutusan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `objekdigugat`
+--
+
+INSERT INTO `objekdigugat` (`OBJGUGATid`, `OBJGUGATajuanSUBID`, `OBJGUGATJenis`, `OBJGUGATnoSurat`, `OBJGUGATtglSurat`, `OBJGUGATnilaiPutusan`) VALUES
+(1, 2, 'Banding', '01.TAP21', '2021-06-01', '3000000'),
+(2, 3, 'Gugat', '0102.Gugat', '2021-06-16', '2000000');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `pemberitahuanuntukhadir`
 --
 
-DROP TABLE IF EXISTS `pemberitahuanuntukhadir`;
 CREATE TABLE `pemberitahuanuntukhadir` (
   `SPUHid` int(11) NOT NULL,
   `SPUHajuanId` int(250) NOT NULL,
@@ -377,7 +389,6 @@ INSERT INTO `pemberitahuanuntukhadir` (`SPUHid`, `SPUHajuanId`, `SPUHnoSurat`, `
 -- Table structure for table `pencabutanwp`
 --
 
-DROP TABLE IF EXISTS `pencabutanwp`;
 CREATE TABLE `pencabutanwp` (
   `QuitWPid` int(100) NOT NULL,
   `QuitWPajuanID` int(100) NOT NULL,
@@ -390,7 +401,7 @@ CREATE TABLE `pencabutanwp` (
 --
 
 INSERT INTO `pencabutanwp` (`QuitWPid`, `QuitWPajuanID`, `QuitWPnoSurat`, `QuitWPtglSurat`) VALUES
-(1, 1, '0101-Dicabut', '2021-06-01');
+(1, 1, '02PencabutanWP', '2021-06-01');
 
 -- --------------------------------------------------------
 
@@ -398,7 +409,6 @@ INSERT INTO `pencabutanwp` (`QuitWPid`, `QuitWPajuanID`, `QuitWPnoSurat`, `QuitW
 -- Table structure for table `penelaahref`
 --
 
-DROP TABLE IF EXISTS `penelaahref`;
 CREATE TABLE `penelaahref` (
   `PENid` int(100) NOT NULL,
   `PENNIP` varchar(100) COLLATE utf8mb4_bin NOT NULL,
@@ -427,7 +437,6 @@ INSERT INTO `penelaahref` (`PENid`, `PENNIP`, `PENNama`, `PENDept`, `PENisAktif`
 -- Table structure for table `pengajuan`
 --
 
-DROP TABLE IF EXISTS `pengajuan`;
 CREATE TABLE `pengajuan` (
   `ajuanId` int(11) NOT NULL,
   `ajuanNamaWP` varchar(250) DEFAULT NULL,
@@ -459,8 +468,8 @@ CREATE TABLE `pengajuan` (
 --
 
 INSERT INTO `pengajuan` (`ajuanId`, `ajuanNamaWP`, `ajuanNPWP`, `ajuanNOP`, `ajuanKodeKPP`, `ajuanJenisPemohonId`, `ajuanJnsPajakId`, `ajuanJenisPemohon`, `ajuanJenisPajak`, `ajuanPIC`, `ajuanMasaPajak`, `ajuanTahunPajak`, `ajuanMataUang`, `ajuanDasarPemrosesan`, `ajuanTglTerima`, `ajuanAlert1`, `ajuanAlert2`, `ajuanAlert3`, `ajuanKeterangan`, `ajuanNamaSeksiKBP`, `ajuanPenelaah`, `ajuanClearedHari`, `ajuanStatusAkhir`) VALUES
-(1, 'PT. Kencana Perkasa', '01.2123.NPWP.0121', '', '218', 1, 1, 'Keberatan', 'Pasal 25 UU KUP', 'Kanwil', '', 2010, 'IDR', 'KEBERATAN', '2021-06-01', '2022-03-31', '2022-04-30', '2022-05-31', NULL, 'Seksi KBP II', 'Lv1 - Admin', NULL, 'Pencabutan Permohonan'),
-(2, 'PT. Baharu Putera', '0202', '0212', '21', 1, 9, 'Keberatan', 'Pasal 15 UU PBB', 'Kanwil', '', 2005, 'IDR', 'KEBERATAN', '2021-06-10', '2022-04-09', '2022-05-09', '2022-06-09', NULL, 'Seksi KBP II', 'Lv1 - Admin', NULL, 'Pencabutan Permohonan'),
+(1, 'PT. Kencana Perkasa', '01.2123.NPWP.0121', '', '218', 1, 1, 'Keberatan', 'Pasal 25 UU KUP', 'Kanwil', '2000', 2010, 'IDR', 'KEBERATAN', '2021-06-01', '2022-03-31', '2022-04-30', '2022-05-31', NULL, 'Seksi KBP II', 'Lv1 - Admin', NULL, 'Pencabutan Permohonan'),
+(2, 'PT. Baharu Putera', '0202', '0212', '21', 1, 9, 'Keberatan', 'Pasal 15 UU PBB', 'Kanwil', '', 2005, 'IDR', 'KEBERATAN', '2021-06-10', '2022-04-09', '2022-05-09', '2022-06-09', NULL, 'Seksi KBP II', 'Lv1 - Admin', NULL, 'Lewat Waktu'),
 (3, 'ForPeneliti', '0101', '21', '21', 1, 1, 'Keberatan', 'Pasal 25 UU KUP', 'Kanwil', '', 2010, 'IDR', 'KEBERATAN', '2021-06-02', '2022-04-01', '2022-05-01', '2022-06-01', NULL, 'Seksi KBP II', 'Lv1 - Admin', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -469,7 +478,6 @@ INSERT INTO `pengajuan` (`ajuanId`, `ajuanNamaWP`, `ajuanNPWP`, `ajuanNOP`, `aju
 -- Table structure for table `pengajuansub`
 --
 
-DROP TABLE IF EXISTS `pengajuansub`;
 CREATE TABLE `pengajuansub` (
   `ajuanSUBID` int(11) NOT NULL,
   `ajuanSUBnoSuratPermintaan` varchar(250) NOT NULL,
@@ -507,14 +515,9 @@ CREATE TABLE `pengajuansub` (
 --
 
 INSERT INTO `pengajuansub` (`ajuanSUBID`, `ajuanSUBnoSuratPermintaan`, `ajuanSUBtglSuratPermintaan`, `ajuanSUBjenisPermintaan`, `ajuanSUBNoKeputusanLama`, `ajuanSUBalert1`, `ajuanSUBalert2`, `ajuanSUBtglDiterima`, `ajuanSUBNomorSengketa`, `ajuanSUBnoSuratBanding`, `ajuanSUBtglSuratBanding`, `ajuanSUBtglDiterimaPP`, `ajuanSUBnamaWP`, `ajuanSUBNPWP`, `ajuanSUBNOP`, `ajuanSUBkodeKPP`, `ajuanSUBjenisPajak`, `ajuanSUBmasaPajak`, `ajuanSUBtahunPajak`, `ajuanSUBmataUang`, `ajuanSUBstatusDalamLaporan`, `ajuanSUBket`, `ajuanSUBnoUB`, `ajuanSUBtglUB`, `ajuanSUBtglKirimUB`, `ajuanSUBNamaPK`, `ajuanSUBstatusArsip`, `ajuanSUBjangkaWaktuSelesaiHari`, `ajuanStatusAkhir`) VALUES
-(1, 'U.0099/PAN.Wk/BG.2/2018', '2021-02-01', 'SURAT URAIAN BANDING (SUB)', 0, '2021-03-15', '2021-05-01', '2021-02-05', 'S.0099/PAN.Wk/BG.2/2018', 'B.0099/PAN.Wk/BG.2/2018', '2021-02-06', '2021-02-07', 'Brian', 'U.0099/PAN.Wk/BG.2/2018', 'N.0099/PAN.Wk/BG.2/2018', 'K.0099/PAN.Wk/BG.2/2018', 'Pasal 25 UU KUP', '', '2019', 'IDR', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'U.8181/PAN.Wk/BG.2/2018', '2021-01-01', 'SURAT TANGGAPAN ATAS GUGATAN ( STG )', 0, '2021-01-15', '2021-02-01', '2021-02-17', 'S.8181/PAN.Wk/BG.2/2018', 'S.8181/PAN.Wk/BG.2/2018', '2021-02-17', '2021-02-17', 'Budianto', 'N.8181/PAN.Wk/BG.2/2018', 'P.8181/PAN.Wk/BG.2/2018', 'K.8181/PAN.Wk/BG.2/2018', 'Pasal 36 ayat (1) huruf a UU KUP', '', '2019', 'IDR', NULL, 'Late', 'U.8181/PAN.Wk/BG.2/2018', '2021-02-17', '2021-02-17', NULL, 'Clear', '+47 days', 'Lewat Waktu'),
-(3, 'U.1234/PAN.Wk/BG.2/2018', '2021-01-01', 'SURAT URAIAN BANDING (SUB)', 0, '2021-02-12', '2021-04-01', '2021-02-17', 'U.1234/PAN.Wk/BG.2/2018', 'U.1234/PAN.Wk/BG.2/2018', '2021-02-17', '2021-02-17', 'Cepi', 'N.1234/PAN.Wk/BG.2/2018', 'N.1234/PAN.Wk/BG.2/2018', 'K.1234/PAN.Wk/BG.2/2018', 'Pasal 15 UU PBB ', '', '2010', 'IDR', NULL, 'Complete', 'U.8181/PAN.Wk/BG.2/2018', '2021-02-17', '2021-02-17', NULL, 'Clear', '+47 days', 'Tepat Waktu'),
-(4, 'U.1234/PAN.Wk/BG.2/2018', '2021-02-01', 'SUB', 0, '2021-03-15', '2021-05-01', '2021-02-02', 'S.1234/PAN.Wk/BG.2/2018', 'S.1234/PAN.Wk/BG.2/2018', '2021-02-05', '2021-02-05', 'Frank', 'N.1234/PAN.Wk/BG.2/2018', 'U.1234/PAN.Wk/BG.2/2018', 'U.1234/PAN.Wk/BG.2/2018', 'Pasal 25 UU KUP', '', '2008', 'IDR', NULL, NULL, NULL, NULL, NULL, 'Root', NULL, NULL, NULL),
-(5, 'SP-333/WPJ.34/2019', '2021-01-15', 'SUB', 0, '2021-02-26', '2021-04-15', '2021-02-01', 'SP-333/WPJ.34/2019', 'SP-333/WPJ.34/2019', '2021-02-02', '2021-02-02', 'Aprilia', 'SP-333/WPJ.34/2019', 'SP-333/WPJ.34/2019', 'SP-333/WPJ.34/2019', 'Pasal 25 UU KUP', '', '2009', 'IDR', NULL, NULL, NULL, NULL, NULL, 'Lv1', NULL, NULL, NULL),
-(6, '0101SUB', '2021-06-10', 'SUB', 0, '2021-07-22', '2021-09-10', '2021-06-01', '0101Sengketa', 'No Banding', '2021-06-09', '2021-06-10', 'MyWP', '01.02.RSDS', '21', '217', 'Pasal 25 UU KUP', '', '2005', 'IDR', NULL, NULL, NULL, NULL, NULL, 'Lv1 - Peneliti', NULL, NULL, NULL),
-(7, '0101', '2021-06-01', 'SUB', 0, '2021-07-13', '2021-09-01', '2021-06-02', 'NOSengketa', 'NoSuratBanding', '2021-06-03', '2021-06-04', 'NmWP', '01.202012', '1212', '219', 'Pasal 15 UU PBB', '', '2005', 'IDR', NULL, NULL, NULL, NULL, NULL, 'Lv1 - Peneliti', NULL, NULL, NULL),
-(8, '01-Mangapul', '2021-06-01', 'SUB', 0, '2021-07-13', '2021-09-01', '2021-06-02', 'Sengketa', 'Banding', '2021-06-03', '2021-06-04', 'Mangapul', '01', '01', '010', 'Pasal 15 UU PBB', '1221', '2005', 'IDR', NULL, NULL, NULL, NULL, NULL, 'Lv1 - Peneliti', NULL, NULL, NULL);
+(1, '01.16062021.SUB', '2021-06-01', 'SUB', 1, '2021-07-12', '2021-08-31', '2021-06-16', '01.16062021.SKT', '01.16062021.SBDNG', '2021-06-04', '2021-06-05', 'PT. Baharu Putera', '0202', '0212', '21', 'Pasal 15 UU PBB', '', '2005', 'IDR', NULL, 'UBKet', '01.16062021UB', '2021-06-10', '2021-06-15', 'L1Peneliti', 'Clear', '+9 days', 'Tepat Waktu'),
+(2, '02.16062021', '2021-06-01', 'SUB', 2, '2021-07-12', '2021-08-31', '2021-06-05', '02.Sengketa', '02.SBNDING', '2021-06-06', '2021-06-07', 'PT. Kencana Perkasa', '01.2123.NPWP.0121', '', '218', 'Pasal 25 UU KUP', '2000', '2010', 'IDR', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, '0101.STG', '2021-06-01', 'STG', 0, '2021-06-14', '2021-06-30', '2021-06-04', '01.Sengketa', '01.SGUGAT', '2021-06-10', '2021-06-16', 'Mince', '01.NPWP', '01.NOP', '01KPP', 'STG', '12', '2005', 'IDR', NULL, 'Tes.STG', '01.STGUB', '2021-06-16', '2021-06-16', 'L1Peneliti', 'Clear', '+15 days', 'Tepat Waktu');
 
 -- --------------------------------------------------------
 
@@ -522,7 +525,6 @@ INSERT INTO `pengajuansub` (`ajuanSUBID`, `ajuanSUBnoSuratPermintaan`, `ajuanSUB
 -- Table structure for table `pengantarkpp`
 --
 
-DROP TABLE IF EXISTS `pengantarkpp`;
 CREATE TABLE `pengantarkpp` (
   `PKPPid` int(11) NOT NULL,
   `PKPPajuanId` int(100) NOT NULL,
@@ -545,7 +547,6 @@ INSERT INTO `pengantarkpp` (`PKPPid`, `PKPPajuanId`, `PKPPnoSurat`, `PKPPtglSura
 -- Table structure for table `penuserlevelref`
 --
 
-DROP TABLE IF EXISTS `penuserlevelref`;
 CREATE TABLE `penuserlevelref` (
   `PENUserLevelId` int(10) NOT NULL,
   `PENUserLevelNama` varchar(250) NOT NULL
@@ -568,7 +569,6 @@ INSERT INTO `penuserlevelref` (`PENUserLevelId`, `PENUserLevelNama`) VALUES
 -- Table structure for table `permintaansuratkpp`
 --
 
-DROP TABLE IF EXISTS `permintaansuratkpp`;
 CREATE TABLE `permintaansuratkpp` (
   `PSKPPid` int(11) NOT NULL,
   `PSKPPajuanId` int(100) NOT NULL,
@@ -582,7 +582,6 @@ CREATE TABLE `permintaansuratkpp` (
 -- Table structure for table `permohonanwp`
 --
 
-DROP TABLE IF EXISTS `permohonanwp`;
 CREATE TABLE `permohonanwp` (
   `PWPid` int(11) NOT NULL,
   `PWPajuanId` int(100) NOT NULL,
@@ -606,14 +605,22 @@ INSERT INTO `permohonanwp` (`PWPid`, `PWPajuanId`, `PWPnoSurat`, `PWPtglSurat`, 
 -- Table structure for table `responkanwil`
 --
 
-DROP TABLE IF EXISTS `responkanwil`;
 CREATE TABLE `responkanwil` (
   `RESPid` int(11) NOT NULL,
   `RESPajuanSUBID` varchar(250) NOT NULL,
-  `RESPjenisTujuan` varchar(250) NOT NULL,
+  `RESPjenisTujuan` int(20) NOT NULL,
   `RESPnoSurat` varchar(250) NOT NULL,
-  `RESPtglSurat` date NOT NULL
+  `RESPtglSurat` date NOT NULL,
+  `RESPtglKirim` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `responkanwil`
+--
+
+INSERT INTO `responkanwil` (`RESPid`, `RESPajuanSUBID`, `RESPjenisTujuan`, `RESPnoSurat`, `RESPtglSurat`, `RESPtglKirim`) VALUES
+(1, '1', 2, '01No.Surat16062001', '2021-06-01', '2021-06-03'),
+(5, '3', 2, '0101STG', '2021-06-16', '2021-06-16');
 
 -- --------------------------------------------------------
 
@@ -621,7 +628,6 @@ CREATE TABLE `responkanwil` (
 -- Table structure for table `subketetapanpajak`
 --
 
-DROP TABLE IF EXISTS `subketetapanpajak`;
 CREATE TABLE `subketetapanpajak` (
   `TETAPAJid` int(11) NOT NULL,
   `TETAPAJajuanSUBID` varchar(250) NOT NULL,
@@ -637,7 +643,6 @@ CREATE TABLE `subketetapanpajak` (
 -- Table structure for table `substg`
 --
 
-DROP TABLE IF EXISTS `substg`;
 CREATE TABLE `substg` (
   `SUBSTGid` int(11) NOT NULL,
   `SUBSTGnama` varchar(250) NOT NULL,
@@ -651,8 +656,7 @@ CREATE TABLE `substg` (
 
 INSERT INTO `substg` (`SUBSTGid`, `SUBSTGnama`, `SUBSTGalert1`, `SUBSTGalert2`) VALUES
 (1, 'SUB', '3', '1.5'),
-(2, 'STG', '1', '0.5'),
-(5, 'STW', '1', '2');
+(2, 'STG', '1', '0.5');
 
 -- --------------------------------------------------------
 
@@ -660,7 +664,6 @@ INSERT INTO `substg` (`SUBSTGid`, `SUBSTGnama`, `SUBSTGalert1`, `SUBSTGalert2`) 
 -- Table structure for table `substgref`
 --
 
-DROP TABLE IF EXISTS `substgref`;
 CREATE TABLE `substgref` (
   `SUBSTGId` int(11) NOT NULL,
   `SUBSTGNama` varchar(200) COLLATE utf8mb4_bin NOT NULL,
@@ -674,7 +677,6 @@ CREATE TABLE `substgref` (
 -- Table structure for table `suratpembuktianwp`
 --
 
-DROP TABLE IF EXISTS `suratpembuktianwp`;
 CREATE TABLE `suratpembuktianwp` (
   `SPWPid` int(11) NOT NULL,
   `SPWPajuanId` int(100) NOT NULL,
@@ -698,7 +700,8 @@ CREATE TABLE `suratpembuktianwp` (
 INSERT INTO `suratpembuktianwp` (`SPWPid`, `SPWPajuanId`, `SPWPnoSurat`, `SPWPtglSurat`, `SPWPtujuan`, `SPWPStatus`, `SPWPisRespon`, `SPWPnoSuratRespon`, `SPWPtglSuratRespon`, `SPWPketeranganRespon`, `SPWPisDatang`, `SPWPnoBeritaAcara`, `SPWPtglBeritaAcara`) VALUES
 (1, 2, '01SP1', '2021-06-01', 'WP', 1, 'Ya', 'R1', '2021-06-01', 'R1', 'Ya', '12BA', '2021-06-02'),
 (2, 2, '02SP2', '2021-06-02', 'WP', 1, 'Tidak', 'R2', '2021-06-15', 'OK', 'Tidak', 'BA', '2021-06-08'),
-(3, 2, '01R3', '2021-06-03', 'WP', 0, '', '', NULL, '', '', '', '0000-00-00');
+(3, 2, '01R3', '2021-06-03', 'WP', 0, '', '', NULL, '', '', '', '0000-00-00'),
+(4, 2, '021606SP', '2021-06-01', 'WP', 0, '', '', NULL, '', '', '', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -706,7 +709,6 @@ INSERT INTO `suratpembuktianwp` (`SPWPid`, `SPWPajuanId`, `SPWPnoSurat`, `SPWPtg
 -- Table structure for table `surattugas`
 --
 
-DROP TABLE IF EXISTS `surattugas`;
 CREATE TABLE `surattugas` (
   `STid` int(11) NOT NULL,
   `STajuanId` int(100) NOT NULL,
@@ -721,8 +723,8 @@ CREATE TABLE `surattugas` (
 
 INSERT INTO `surattugas` (`STid`, `STajuanId`, `STnoSurat`, `STtglSurat`, `STPenelaah`) VALUES
 (1, 1, '0101', '2021-06-01', 4),
-(2, 2, '0202', '2021-06-02', 4),
-(3, 3, '0303', '2021-06-03', 25);
+(4, 2, '0202', '2021-06-02', 4),
+(5, 3, '01212', '2021-06-02', 25);
 
 -- --------------------------------------------------------
 
@@ -730,7 +732,6 @@ INSERT INTO `surattugas` (`STid`, `STajuanId`, `STnoSurat`, `STtglSurat`, `STPen
 -- Stand-in structure for view `v_jenispajak`
 -- (See below for the actual view)
 --
-DROP VIEW IF EXISTS `v_jenispajak`;
 CREATE TABLE `v_jenispajak` (
 `jnsPajakId` int(11)
 ,`JenisPemohon` varchar(100)
@@ -744,10 +745,51 @@ CREATE TABLE `v_jenispajak` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `v_kepsub`
+-- (See below for the actual view)
+--
+CREATE TABLE `v_kepsub` (
+`KEPid` int(11)
+,`KEPajuanId` int(250)
+,`KEPnoKeputusan` varchar(250)
+,`KEPtglKeputusan` date
+,`KEPtglKirimSK` date
+,`KEPjangkaKirim` int(100)
+,`KEPjenis` int(10)
+,`KEPAmarKeputusan` double
+,`ajuanId` int(11)
+,`ajuanNamaWP` varchar(250)
+,`ajuanNPWP` varchar(200)
+,`ajuanNOP` varchar(100)
+,`ajuanKodeKPP` varchar(100)
+,`ajuanJenisPemohonId` int(11)
+,`ajuanJnsPajakId` int(11)
+,`ajuanJenisPemohon` varchar(100)
+,`ajuanJenisPajak` varchar(100)
+,`ajuanPIC` varchar(100)
+,`ajuanMasaPajak` varchar(100)
+,`ajuanTahunPajak` int(100)
+,`ajuanMataUang` varchar(100)
+,`ajuanDasarPemrosesan` varchar(200)
+,`ajuanTglTerima` date
+,`ajuanAlert1` date
+,`ajuanAlert2` date
+,`ajuanAlert3` date
+,`ajuanKeterangan` text
+,`ajuanNamaSeksiKBP` varchar(250)
+,`ajuanPenelaah` varchar(250)
+,`ajuanClearedHari` int(100)
+,`ajuanStatusAkhir` varchar(100)
+,`IdAmar` int(11)
+,`AmarKeputusan` varchar(50)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `v_pengajuan`
 -- (See below for the actual view)
 --
-DROP VIEW IF EXISTS `v_pengajuan`;
 CREATE TABLE `v_pengajuan` (
 `ajuanId` int(11)
 ,`ajuanNamaWP` varchar(250)
@@ -784,7 +826,6 @@ CREATE TABLE `v_pengajuan` (
 -- Stand-in structure for view `v_pengajuanassign`
 -- (See below for the actual view)
 --
-DROP VIEW IF EXISTS `v_pengajuanassign`;
 CREATE TABLE `v_pengajuanassign` (
 `ajuanId` int(11)
 ,`ajuanNamaWP` varchar(250)
@@ -822,12 +863,12 @@ CREATE TABLE `v_pengajuanassign` (
 -- Stand-in structure for view `v_pengajuansub`
 -- (See below for the actual view)
 --
-DROP VIEW IF EXISTS `v_pengajuansub`;
 CREATE TABLE `v_pengajuansub` (
 `ajuanSUBID` int(11)
 ,`ajuanSUBnoSuratPermintaan` varchar(250)
 ,`ajuanSUBtglSuratPermintaan` date
 ,`ajuanSUBjenisPermintaan` varchar(100)
+,`ajuanSUBNoKeputusanLama` int(50)
 ,`ajuanSUBalert1` date
 ,`ajuanSUBalert2` date
 ,`ajuanSUBtglDiterima` date
@@ -852,8 +893,12 @@ CREATE TABLE `v_pengajuansub` (
 ,`ajuanSUBstatusArsip` varchar(100)
 ,`ajuanSUBjangkaWaktuSelesaiHari` varchar(100)
 ,`ajuanStatusAkhir` varchar(100)
-,`jangka_waktu_selesai` int(7)
+,`jangka_waktu_selesai` bigint(21)
 ,`status_open` varchar(12)
+,`KEPnoKeputusan` varchar(250)
+,`KEPtglKeputusan` date
+,`KEPjenis` int(10)
+,`KEPAmarKeputusan` double
 );
 
 -- --------------------------------------------------------
@@ -863,8 +908,16 @@ CREATE TABLE `v_pengajuansub` (
 --
 DROP TABLE IF EXISTS `v_jenispajak`;
 
-DROP VIEW IF EXISTS `v_jenispajak`;
-CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_jenispajak`  AS  select `jpjk`.`jnsPajakId` AS `jnsPajakId`,`jph`.`JenisPemohon` AS `JenisPemohon`,`jpjk`.`NamajenisPajak` AS `NamajenisPajak`,`jpjk`.`alert1JangkaMaksimal` AS `alert1JangkaMaksimal`,`jpjk`.`alert2IKU` AS `alert2IKU`,`jpjk`.`alert3MitigasiResiko` AS `alert3MitigasiResiko`,`jpjk`.`keterangan` AS `keterangan` from (`jenispajak` `jpjk` left join `jenispemohon` `jph` on(`jph`.`idJenisPemohon` = `jpjk`.`idJenisPemohon`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_jenispajak`  AS  select `jpjk`.`jnsPajakId` AS `jnsPajakId`,`jph`.`JenisPemohon` AS `JenisPemohon`,`jpjk`.`NamajenisPajak` AS `NamajenisPajak`,`jpjk`.`alert1JangkaMaksimal` AS `alert1JangkaMaksimal`,`jpjk`.`alert2IKU` AS `alert2IKU`,`jpjk`.`alert3MitigasiResiko` AS `alert3MitigasiResiko`,`jpjk`.`keterangan` AS `keterangan` from (`jenispajak` `jpjk` left join `jenispemohon` `jph` on(`jph`.`idJenisPemohon` = `jpjk`.`idJenisPemohon`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_kepsub`
+--
+DROP TABLE IF EXISTS `v_kepsub`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_kepsub`  AS  select `kp`.`KEPid` AS `KEPid`,`kp`.`KEPajuanId` AS `KEPajuanId`,`kp`.`KEPnoKeputusan` AS `KEPnoKeputusan`,`kp`.`KEPtglKeputusan` AS `KEPtglKeputusan`,`kp`.`KEPtglKirimSK` AS `KEPtglKirimSK`,`kp`.`KEPjangkaKirim` AS `KEPjangkaKirim`,`kp`.`KEPjenis` AS `KEPjenis`,`kp`.`KEPAmarKeputusan` AS `KEPAmarKeputusan`,`p`.`ajuanId` AS `ajuanId`,`p`.`ajuanNamaWP` AS `ajuanNamaWP`,`p`.`ajuanNPWP` AS `ajuanNPWP`,`p`.`ajuanNOP` AS `ajuanNOP`,`p`.`ajuanKodeKPP` AS `ajuanKodeKPP`,`p`.`ajuanJenisPemohonId` AS `ajuanJenisPemohonId`,`p`.`ajuanJnsPajakId` AS `ajuanJnsPajakId`,`p`.`ajuanJenisPemohon` AS `ajuanJenisPemohon`,`p`.`ajuanJenisPajak` AS `ajuanJenisPajak`,`p`.`ajuanPIC` AS `ajuanPIC`,`p`.`ajuanMasaPajak` AS `ajuanMasaPajak`,`p`.`ajuanTahunPajak` AS `ajuanTahunPajak`,`p`.`ajuanMataUang` AS `ajuanMataUang`,`p`.`ajuanDasarPemrosesan` AS `ajuanDasarPemrosesan`,`p`.`ajuanTglTerima` AS `ajuanTglTerima`,`p`.`ajuanAlert1` AS `ajuanAlert1`,`p`.`ajuanAlert2` AS `ajuanAlert2`,`p`.`ajuanAlert3` AS `ajuanAlert3`,`p`.`ajuanKeterangan` AS `ajuanKeterangan`,`p`.`ajuanNamaSeksiKBP` AS `ajuanNamaSeksiKBP`,`p`.`ajuanPenelaah` AS `ajuanPenelaah`,`p`.`ajuanClearedHari` AS `ajuanClearedHari`,`p`.`ajuanStatusAkhir` AS `ajuanStatusAkhir`,`ak`.`IdAmar` AS `IdAmar`,`ak`.`AmarKeputusan` AS `AmarKeputusan` from ((`keputusan` `kp` left join `pengajuan` `p` on(`kp`.`KEPajuanId` = `p`.`ajuanId`)) left join `amar_keputusan` `ak` on(`ak`.`IdAmar` = `kp`.`KEPjenis`)) ;
 
 -- --------------------------------------------------------
 
@@ -873,8 +926,7 @@ CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_jenispajak`  
 --
 DROP TABLE IF EXISTS `v_pengajuan`;
 
-DROP VIEW IF EXISTS `v_pengajuan`;
-CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_pengajuan`  AS  select `p`.`ajuanId` AS `ajuanId`,`p`.`ajuanNamaWP` AS `ajuanNamaWP`,`p`.`ajuanNPWP` AS `ajuanNPWP`,`p`.`ajuanNOP` AS `ajuanNOP`,`p`.`ajuanKodeKPP` AS `ajuanKodeKPP`,`p`.`ajuanJenisPemohonId` AS `ajuanJenisPemohonId`,`p`.`ajuanJnsPajakId` AS `ajuanJnsPajakId`,`p`.`ajuanJenisPemohon` AS `ajuanJenisPemohon`,`p`.`ajuanJenisPajak` AS `ajuanJenisPajak`,`p`.`ajuanPIC` AS `ajuanPIC`,`p`.`ajuanMasaPajak` AS `ajuanMasaPajak`,`p`.`ajuanTahunPajak` AS `ajuanTahunPajak`,`p`.`ajuanMataUang` AS `ajuanMataUang`,`p`.`ajuanDasarPemrosesan` AS `ajuanDasarPemrosesan`,`p`.`ajuanTglTerima` AS `ajuanTglTerima`,`p`.`ajuanAlert1` AS `ajuanAlert1`,`p`.`ajuanAlert2` AS `ajuanAlert2`,`p`.`ajuanAlert3` AS `ajuanAlert3`,`p`.`ajuanKeterangan` AS `ajuanKeterangan`,`p`.`ajuanNamaSeksiKBP` AS `ajuanNamaSeksiKBP`,`p`.`ajuanPenelaah` AS `ajuanPenelaah`,`p`.`ajuanClearedHari` AS `ajuanClearedHari`,`p`.`ajuanStatusAkhir` AS `ajuanStatusAkhir`,`k`.`KEPtglKeputusan` AS `KEPtglKeputusan`,`pwp`.`QuitWPtglSurat` AS `QuitWPtglSurat`,timestampdiff(MONTH,`p`.`ajuanTglTerima`,`k`.`KEPtglKeputusan`) AS `jangka_waktu_selesai`,case when `p`.`ajuanStatusAkhir` <> '' then '-' when curdate() < `p`.`ajuanAlert1` then 'Sebelum IKU1' when curdate() < `p`.`ajuanAlert2` then 'Sebelum IKU2' when curdate() < `p`.`ajuanAlert3` then 'Sebelum IKU3' when curdate() > `p`.`ajuanAlert3` then 'Lewat Waktu' end AS `status_open` from ((`pengajuan` `p` left join `keputusan` `k` on(`k`.`KEPajuanId` = `p`.`ajuanId`)) left join `pencabutanwp` `pwp` on(`pwp`.`QuitWPajuanID` = `p`.`ajuanId`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pengajuan`  AS  select `p`.`ajuanId` AS `ajuanId`,`p`.`ajuanNamaWP` AS `ajuanNamaWP`,`p`.`ajuanNPWP` AS `ajuanNPWP`,`p`.`ajuanNOP` AS `ajuanNOP`,`p`.`ajuanKodeKPP` AS `ajuanKodeKPP`,`p`.`ajuanJenisPemohonId` AS `ajuanJenisPemohonId`,`p`.`ajuanJnsPajakId` AS `ajuanJnsPajakId`,`p`.`ajuanJenisPemohon` AS `ajuanJenisPemohon`,`p`.`ajuanJenisPajak` AS `ajuanJenisPajak`,`p`.`ajuanPIC` AS `ajuanPIC`,`p`.`ajuanMasaPajak` AS `ajuanMasaPajak`,`p`.`ajuanTahunPajak` AS `ajuanTahunPajak`,`p`.`ajuanMataUang` AS `ajuanMataUang`,`p`.`ajuanDasarPemrosesan` AS `ajuanDasarPemrosesan`,`p`.`ajuanTglTerima` AS `ajuanTglTerima`,`p`.`ajuanAlert1` AS `ajuanAlert1`,`p`.`ajuanAlert2` AS `ajuanAlert2`,`p`.`ajuanAlert3` AS `ajuanAlert3`,`p`.`ajuanKeterangan` AS `ajuanKeterangan`,`p`.`ajuanNamaSeksiKBP` AS `ajuanNamaSeksiKBP`,`p`.`ajuanPenelaah` AS `ajuanPenelaah`,`p`.`ajuanClearedHari` AS `ajuanClearedHari`,`p`.`ajuanStatusAkhir` AS `ajuanStatusAkhir`,`k`.`KEPtglKeputusan` AS `KEPtglKeputusan`,`pwp`.`QuitWPtglSurat` AS `QuitWPtglSurat`,timestampdiff(MONTH,`p`.`ajuanTglTerima`,`k`.`KEPtglKeputusan`) AS `jangka_waktu_selesai`,case when `p`.`ajuanStatusAkhir` <> '' then '-' when curdate() < `p`.`ajuanAlert1` then 'Sebelum IKU1' when curdate() < `p`.`ajuanAlert2` then 'Sebelum IKU2' when curdate() < `p`.`ajuanAlert3` then 'Sebelum IKU3' when curdate() > `p`.`ajuanAlert3` then 'Lewat Waktu' end AS `status_open` from ((`pengajuan` `p` left join `keputusan` `k` on(`k`.`KEPajuanId` = `p`.`ajuanId`)) left join `pencabutanwp` `pwp` on(`pwp`.`QuitWPajuanID` = `p`.`ajuanId`)) ;
 
 -- --------------------------------------------------------
 
@@ -883,8 +935,7 @@ CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_pengajuan`  A
 --
 DROP TABLE IF EXISTS `v_pengajuanassign`;
 
-DROP VIEW IF EXISTS `v_pengajuanassign`;
-CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_pengajuanassign`  AS  select `p`.`ajuanId` AS `ajuanId`,`p`.`ajuanNamaWP` AS `ajuanNamaWP`,`p`.`ajuanNPWP` AS `ajuanNPWP`,`p`.`ajuanNOP` AS `ajuanNOP`,`p`.`ajuanKodeKPP` AS `ajuanKodeKPP`,`p`.`ajuanJenisPemohonId` AS `ajuanJenisPemohonId`,`p`.`ajuanJnsPajakId` AS `ajuanJnsPajakId`,`p`.`ajuanJenisPemohon` AS `ajuanJenisPemohon`,`p`.`ajuanJenisPajak` AS `ajuanJenisPajak`,`p`.`ajuanPIC` AS `ajuanPIC`,`p`.`ajuanMasaPajak` AS `ajuanMasaPajak`,`p`.`ajuanTahunPajak` AS `ajuanTahunPajak`,`p`.`ajuanMataUang` AS `ajuanMataUang`,`p`.`ajuanDasarPemrosesan` AS `ajuanDasarPemrosesan`,`p`.`ajuanTglTerima` AS `ajuanTglTerima`,`p`.`ajuanAlert1` AS `ajuanAlert1`,`p`.`ajuanAlert2` AS `ajuanAlert2`,`p`.`ajuanAlert3` AS `ajuanAlert3`,`p`.`ajuanKeterangan` AS `ajuanKeterangan`,`p`.`ajuanNamaSeksiKBP` AS `ajuanNamaSeksiKBP`,`p`.`ajuanPenelaah` AS `ajuanPenelaah`,`p`.`ajuanClearedHari` AS `ajuanClearedHari`,`p`.`ajuanStatusAkhir` AS `ajuanStatusAkhir`,`k`.`KEPtglKeputusan` AS `KEPtglKeputusan`,`pwp`.`QuitWPtglSurat` AS `QuitWPtglSurat`,timestampdiff(MONTH,`p`.`ajuanTglTerima`,`k`.`KEPtglKeputusan`) AS `jangka_waktu_selesai`,case when `p`.`ajuanStatusAkhir` <> '' then '-' when curdate() < `p`.`ajuanAlert1` then 'Sebelum IKU1' when curdate() < `p`.`ajuanAlert2` then 'Sebelum IKU2' when curdate() < `p`.`ajuanAlert3` then 'Sebelum IKU3' when curdate() > `p`.`ajuanAlert3` then 'Lewat Waktu' end AS `status_open`,`st`.`STPenelaah` AS `STPenelaah` from (((`pengajuan` `p` left join `keputusan` `k` on(`k`.`KEPajuanId` = `p`.`ajuanId`)) left join `pencabutanwp` `pwp` on(`pwp`.`QuitWPajuanID` = `p`.`ajuanId`)) left join `surattugas` `st` on(`st`.`STajuanId` = `p`.`ajuanId`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pengajuanassign`  AS  select `p`.`ajuanId` AS `ajuanId`,`p`.`ajuanNamaWP` AS `ajuanNamaWP`,`p`.`ajuanNPWP` AS `ajuanNPWP`,`p`.`ajuanNOP` AS `ajuanNOP`,`p`.`ajuanKodeKPP` AS `ajuanKodeKPP`,`p`.`ajuanJenisPemohonId` AS `ajuanJenisPemohonId`,`p`.`ajuanJnsPajakId` AS `ajuanJnsPajakId`,`p`.`ajuanJenisPemohon` AS `ajuanJenisPemohon`,`p`.`ajuanJenisPajak` AS `ajuanJenisPajak`,`p`.`ajuanPIC` AS `ajuanPIC`,`p`.`ajuanMasaPajak` AS `ajuanMasaPajak`,`p`.`ajuanTahunPajak` AS `ajuanTahunPajak`,`p`.`ajuanMataUang` AS `ajuanMataUang`,`p`.`ajuanDasarPemrosesan` AS `ajuanDasarPemrosesan`,`p`.`ajuanTglTerima` AS `ajuanTglTerima`,`p`.`ajuanAlert1` AS `ajuanAlert1`,`p`.`ajuanAlert2` AS `ajuanAlert2`,`p`.`ajuanAlert3` AS `ajuanAlert3`,`p`.`ajuanKeterangan` AS `ajuanKeterangan`,`p`.`ajuanNamaSeksiKBP` AS `ajuanNamaSeksiKBP`,`p`.`ajuanPenelaah` AS `ajuanPenelaah`,`p`.`ajuanClearedHari` AS `ajuanClearedHari`,`p`.`ajuanStatusAkhir` AS `ajuanStatusAkhir`,`k`.`KEPtglKeputusan` AS `KEPtglKeputusan`,`pwp`.`QuitWPtglSurat` AS `QuitWPtglSurat`,timestampdiff(MONTH,`p`.`ajuanTglTerima`,`k`.`KEPtglKeputusan`) AS `jangka_waktu_selesai`,case when `p`.`ajuanStatusAkhir` <> '' then '-' when curdate() < `p`.`ajuanAlert1` then 'Sebelum IKU1' when curdate() < `p`.`ajuanAlert2` then 'Sebelum IKU2' when curdate() < `p`.`ajuanAlert3` then 'Sebelum IKU3' when curdate() > `p`.`ajuanAlert3` then 'Lewat Waktu' end AS `status_open`,`st`.`STPenelaah` AS `STPenelaah` from (((`pengajuan` `p` left join `keputusan` `k` on(`k`.`KEPajuanId` = `p`.`ajuanId`)) left join `pencabutanwp` `pwp` on(`pwp`.`QuitWPajuanID` = `p`.`ajuanId`)) left join `surattugas` `st` on(`st`.`STajuanId` = `p`.`ajuanId`)) ;
 
 -- --------------------------------------------------------
 
@@ -893,8 +944,7 @@ CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_pengajuanassi
 --
 DROP TABLE IF EXISTS `v_pengajuansub`;
 
-DROP VIEW IF EXISTS `v_pengajuansub`;
-CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_pengajuansub`  AS  select `pengajuansub`.`ajuanSUBID` AS `ajuanSUBID`,`pengajuansub`.`ajuanSUBnoSuratPermintaan` AS `ajuanSUBnoSuratPermintaan`,`pengajuansub`.`ajuanSUBtglSuratPermintaan` AS `ajuanSUBtglSuratPermintaan`,`pengajuansub`.`ajuanSUBjenisPermintaan` AS `ajuanSUBjenisPermintaan`,`pengajuansub`.`ajuanSUBalert1` AS `ajuanSUBalert1`,`pengajuansub`.`ajuanSUBalert2` AS `ajuanSUBalert2`,`pengajuansub`.`ajuanSUBtglDiterima` AS `ajuanSUBtglDiterima`,`pengajuansub`.`ajuanSUBNomorSengketa` AS `ajuanSUBNomorSengketa`,`pengajuansub`.`ajuanSUBnoSuratBanding` AS `ajuanSUBnoSuratBanding`,`pengajuansub`.`ajuanSUBtglSuratBanding` AS `ajuanSUBtglSuratBanding`,`pengajuansub`.`ajuanSUBtglDiterimaPP` AS `ajuanSUBtglDiterimaPP`,`pengajuansub`.`ajuanSUBnamaWP` AS `ajuanSUBnamaWP`,`pengajuansub`.`ajuanSUBNPWP` AS `ajuanSUBNPWP`,`pengajuansub`.`ajuanSUBNOP` AS `ajuanSUBNOP`,`pengajuansub`.`ajuanSUBkodeKPP` AS `ajuanSUBkodeKPP`,`pengajuansub`.`ajuanSUBjenisPajak` AS `ajuanSUBjenisPajak`,`pengajuansub`.`ajuanSUBmasaPajak` AS `ajuanSUBmasaPajak`,`pengajuansub`.`ajuanSUBtahunPajak` AS `ajuanSUBtahunPajak`,`pengajuansub`.`ajuanSUBmataUang` AS `ajuanSUBmataUang`,`pengajuansub`.`ajuanSUBstatusDalamLaporan` AS `ajuanSUBstatusDalamLaporan`,`pengajuansub`.`ajuanSUBket` AS `ajuanSUBket`,`pengajuansub`.`ajuanSUBnoUB` AS `ajuanSUBnoUB`,`pengajuansub`.`ajuanSUBtglUB` AS `ajuanSUBtglUB`,`pengajuansub`.`ajuanSUBtglKirimUB` AS `ajuanSUBtglKirimUB`,`pengajuansub`.`ajuanSUBNamaPK` AS `ajuanSUBNamaPK`,`pengajuansub`.`ajuanSUBstatusArsip` AS `ajuanSUBstatusArsip`,`pengajuansub`.`ajuanSUBjangkaWaktuSelesaiHari` AS `ajuanSUBjangkaWaktuSelesaiHari`,`pengajuansub`.`ajuanStatusAkhir` AS `ajuanStatusAkhir`,to_days(`pengajuansub`.`ajuanSUBtglKirimUB`) - to_days(`pengajuansub`.`ajuanSUBtglSuratPermintaan`) AS `jangka_waktu_selesai`,case when `pengajuansub`.`ajuanStatusAkhir` <> '' then '-' when curdate() < `pengajuansub`.`ajuanSUBalert1` then 'Sebelum IKU1' when curdate() < `pengajuansub`.`ajuanSUBalert2` then 'Sebelum IKU2' end AS `status_open` from `pengajuansub` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pengajuansub`  AS  select `psub`.`ajuanSUBID` AS `ajuanSUBID`,`psub`.`ajuanSUBnoSuratPermintaan` AS `ajuanSUBnoSuratPermintaan`,`psub`.`ajuanSUBtglSuratPermintaan` AS `ajuanSUBtglSuratPermintaan`,`psub`.`ajuanSUBjenisPermintaan` AS `ajuanSUBjenisPermintaan`,`psub`.`ajuanSUBNoKeputusanLama` AS `ajuanSUBNoKeputusanLama`,`psub`.`ajuanSUBalert1` AS `ajuanSUBalert1`,`psub`.`ajuanSUBalert2` AS `ajuanSUBalert2`,`psub`.`ajuanSUBtglDiterima` AS `ajuanSUBtglDiterima`,`psub`.`ajuanSUBNomorSengketa` AS `ajuanSUBNomorSengketa`,`psub`.`ajuanSUBnoSuratBanding` AS `ajuanSUBnoSuratBanding`,`psub`.`ajuanSUBtglSuratBanding` AS `ajuanSUBtglSuratBanding`,`psub`.`ajuanSUBtglDiterimaPP` AS `ajuanSUBtglDiterimaPP`,`psub`.`ajuanSUBnamaWP` AS `ajuanSUBnamaWP`,`psub`.`ajuanSUBNPWP` AS `ajuanSUBNPWP`,`psub`.`ajuanSUBNOP` AS `ajuanSUBNOP`,`psub`.`ajuanSUBkodeKPP` AS `ajuanSUBkodeKPP`,`psub`.`ajuanSUBjenisPajak` AS `ajuanSUBjenisPajak`,`psub`.`ajuanSUBmasaPajak` AS `ajuanSUBmasaPajak`,`psub`.`ajuanSUBtahunPajak` AS `ajuanSUBtahunPajak`,`psub`.`ajuanSUBmataUang` AS `ajuanSUBmataUang`,`psub`.`ajuanSUBstatusDalamLaporan` AS `ajuanSUBstatusDalamLaporan`,`psub`.`ajuanSUBket` AS `ajuanSUBket`,`psub`.`ajuanSUBnoUB` AS `ajuanSUBnoUB`,`psub`.`ajuanSUBtglUB` AS `ajuanSUBtglUB`,`psub`.`ajuanSUBtglKirimUB` AS `ajuanSUBtglKirimUB`,`psub`.`ajuanSUBNamaPK` AS `ajuanSUBNamaPK`,`psub`.`ajuanSUBstatusArsip` AS `ajuanSUBstatusArsip`,`psub`.`ajuanSUBjangkaWaktuSelesaiHari` AS `ajuanSUBjangkaWaktuSelesaiHari`,`psub`.`ajuanStatusAkhir` AS `ajuanStatusAkhir`,timestampdiff(MONTH,`psub`.`ajuanSUBtglSuratPermintaan`,`psub`.`ajuanSUBtglUB`) AS `jangka_waktu_selesai`,case when `psub`.`ajuanStatusAkhir` <> '' then '-' when curdate() < `psub`.`ajuanSUBalert1` then 'Sebelum IKU1' when curdate() < `psub`.`ajuanSUBalert2` then 'Sebelum IKU2' when curdate() > `psub`.`ajuanSUBalert2` then 'Lewat Waktu' end AS `status_open`,`kep`.`KEPnoKeputusan` AS `KEPnoKeputusan`,`kep`.`KEPtglKeputusan` AS `KEPtglKeputusan`,`kep`.`KEPjenis` AS `KEPjenis`,`kep`.`KEPAmarKeputusan` AS `KEPAmarKeputusan` from (`pengajuansub` `psub` left join `keputusan` `kep` on(`kep`.`KEPid` = `psub`.`ajuanSUBNoKeputusanLama`)) ;
 
 --
 -- Indexes for dumped tables
@@ -1094,7 +1144,7 @@ ALTER TABLE `surattugas`
 -- AUTO_INCREMENT for table `amar_keputusan`
 --
 ALTER TABLE `amar_keputusan`
-  MODIFY `IdAmar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IdAmar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `departemen`
@@ -1136,7 +1186,7 @@ ALTER TABLE `jenisketetapan`
 -- AUTO_INCREMENT for table `jenispajak`
 --
 ALTER TABLE `jenispajak`
-  MODIFY `jnsPajakId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `jnsPajakId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `jenispemohon`
@@ -1148,13 +1198,13 @@ ALTER TABLE `jenispemohon`
 -- AUTO_INCREMENT for table `jenistujuanrespon`
 --
 ALTER TABLE `jenistujuanrespon`
-  MODIFY `RESPTUJid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `RESPTUJid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `keputusan`
 --
 ALTER TABLE `keputusan`
-  MODIFY `KEPid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `KEPid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ketetapanpajak`
@@ -1166,7 +1216,7 @@ ALTER TABLE `ketetapanpajak`
 -- AUTO_INCREMENT for table `ketetapanpajaksub`
 --
 ALTER TABLE `ketetapanpajaksub`
-  MODIFY `TETAPAJid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `TETAPAJid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `kpp`
@@ -1184,7 +1234,7 @@ ALTER TABLE `laporanpenelitian`
 -- AUTO_INCREMENT for table `objekdigugat`
 --
 ALTER TABLE `objekdigugat`
-  MODIFY `OBJGUGATid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OBJGUGATid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pemberitahuanuntukhadir`
@@ -1214,7 +1264,7 @@ ALTER TABLE `pengajuan`
 -- AUTO_INCREMENT for table `pengajuansub`
 --
 ALTER TABLE `pengajuansub`
-  MODIFY `ajuanSUBID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ajuanSUBID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pengantarkpp`
@@ -1244,7 +1294,7 @@ ALTER TABLE `permohonanwp`
 -- AUTO_INCREMENT for table `responkanwil`
 --
 ALTER TABLE `responkanwil`
-  MODIFY `RESPid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `RESPid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `subketetapanpajak`
@@ -1268,13 +1318,13 @@ ALTER TABLE `substgref`
 -- AUTO_INCREMENT for table `suratpembuktianwp`
 --
 ALTER TABLE `suratpembuktianwp`
-  MODIFY `SPWPid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `SPWPid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `surattugas`
 --
 ALTER TABLE `surattugas`
-  MODIFY `STid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `STid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
