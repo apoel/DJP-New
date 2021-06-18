@@ -28,6 +28,13 @@ class model_stg extends Model
 
 	}
 
+	public function get_MataUang()
+	{
+		return $this->db->table('matauang')
+                        ->get() 
+                        ->getResultArray();                
+	}
+	
 	public function getDetailPengajuan($id=false)
 	{
 		$builder = $this->db->table('pengajuan');

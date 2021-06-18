@@ -17,19 +17,26 @@ class MPengajuan extends Model
 		}else{
 			return $this->table('v_pengajuan')
                         ->where('ajuanId', $id)
+                        ->orderBy('ajuanId','DESC')
                         ->get()
                         ->getRowArray();
 		}
 	}
 
+
+	public function get_MataUang()
+	{
+		return $this->db->table('matauang')
+                        ->get() 
+                        ->getResultArray();                
+	}
+
 	public function getPengajuanAssign($PENid)
 	{
 		return $this->db->table('v_pengajuanAssign')
-                        // ->where('ajuanId', $id)
                         ->where('STPenelaah',$PENid)
-                        ->get();
-                     
-
+                        ->orderBy('ajuanId','DESC')
+                        ->get();                 
 	}
 
 	public function getDetailPengajuan($id=false)
@@ -276,7 +283,7 @@ class MPengajuan extends Model
 	public function get_KetetapanPajak($id=false)
 	{
 
-		$builder = $this->db->query("SELECT jenisketetapan.JKnama,ketetapanpajak.KPNoKetetapan, ketetapanpajak.KPTgl, ketetapanpajak.KPNilai FROM ketetapanpajak left JOIN jenisketetapan ON jenisketetapan.JKid = ketetapanpajak.KPJKid WHERE ketetapanpajak.KPajuanId = $id");
+		$builder = $this->db->query("SELECT ketetapanpajak.KPid,jenisketetapan.JKnama,ketetapanpajak.KPNoKetetapan, ketetapanpajak.KPTgl, ketetapanpajak.KPNilai FROM ketetapanpajak left JOIN jenisketetapan ON jenisketetapan.JKid = ketetapanpajak.KPJKid WHERE ketetapanpajak.KPajuanId = $id");
 		return $builder->getResultArray();
 	}
 
@@ -407,5 +414,64 @@ class MPengajuan extends Model
 		$query = $builder->get();
 		return $query->getResultArray();
 
+	}
+
+	//Model - for Editor
+	//Ajax
+	//1. Ketetapan Pajak
+	public function get_IdKP($id=false)
+	{
+		$builder = $this->db->query("SELECT ketetapanpajak.KPid,ketetapanpajak.KPajuanId,jenisketetapan.JKnama,ketetapanpajak.KPNoKetetapan, ketetapanpajak.KPTgl, ketetapanpajak.KPNilai FROM ketetapanpajak left JOIN jenisketetapan ON jenisketetapan.JKid = ketetapanpajak.KPJKid WHERE ketetapanpajak.KPid = $id");
+		return $builder->getResultArray();
+	}
+	public function get_IdPWP($id=false)
+	{
+		return $this->db->table('permohonanwp')
+                        ->where('PWPid', $id)
+                        ->get()
+                        ->getResultArray();
+	}
+	public function get_IdPKPP($id=false)
+	{
+		return $this->db->table('pengantarkpp')
+                        ->where('PKPPid', $id)
+                        ->get()
+                        ->getResultArray();
+	}
+	public function get_IdST($id=false)
+	{
+		$builder = $this->db->query("SELECT st.STid, st.STajuanId, st.STnoSurat,st.STtglSurat,pf.PENid, pf.PENNama FROM surattugas st
+			LEFT JOIN penelaahref pf on st.STPenelaah = pf.PENid 
+			WHERE STid = '$id'");
+			return $builder->getResultArray();
+
+		// return $this->db->table('surattugas')
+  //                       ->where('STid', $id)
+  //                       ->get()
+  //                       ->getResultArray();
+	}
+	public function get_IdFM($id=false)
+	{
+		return $this->db->table('formatmatrik')
+                        ->where('FMid', $id)
+                        ->get()
+                        ->getResultArray();
+	}
+
+	
+	public function get_IdPSKPP($id=false)
+	{
+		return $this->db->table('permintaansuratkpp')
+                        ->where('PSKPPid', $id)
+                        ->get()
+                        ->getResultArray();
+	}
+
+	//Update DB
+	//For Edit Modal
+	public function UpdateForEditor($table,$data,$key,$id)
+	{
+		$query = $this->db->table($table)->update($data,[$key => $id]);
+		return $query;
 	}
 } 

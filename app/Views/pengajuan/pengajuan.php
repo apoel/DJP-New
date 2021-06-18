@@ -167,13 +167,12 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Mata Uang</label>
                     <div class="col-md-8">
-                        <select class="form-control" name="mata_uang" id="mata_uang" required>
+                        <select class="form-control" name="mata_uang" id="id_matauang" required>
                             <option value="">No Selected</option>
-                            <option value="IDR">IDR</option>
-                            <option value="SGD">SGD</option>
-                            <option value="USD">USD</option>
-                            <option value="RM">RM</option>
-                        </select>  
+                            <?php foreach($list_matauang as $row) {?>
+                            <option value="<?=$row['MataUang'] ?>"> <?= $row['MataUang'] ?></option>
+                            <?php }?>
+                        </select> 
                     </div>
                 </div>
                 <div class="form-group row">

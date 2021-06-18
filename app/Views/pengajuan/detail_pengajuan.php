@@ -233,10 +233,11 @@ f<?php $request = \Config\Services::request(); ?>
                 // }elseif($detail_pengajuan['ajuanStatusAkhir'] != ""){
                 //     echo "disabled";
                 // }
+                
                 //disable if close
-                // if($detail_pengajuan['ajuanStatusAkhir'] != ""){
-                //     echo "disabled";
-                // }
+                if($detail_pengajuan['ajuanStatusAkhir'] != ""){
+                    echo "disabled";
+                }
 
 
                 ?>
@@ -277,7 +278,7 @@ f<?php $request = \Config\Services::request(); ?>
                             <!-- nilaiAkhirKepId="<?// $row['KPNilai'];?>" -->
                             <a data-target="#mKeputusan" data-toggle="modal" class="dropdown-item" id="myKeputusan" href="#myKeputusan" ajuanID="<?= $detail_pengajuan['ajuanId']?>"><i class="fas fa-chevron-circle-right"></i> Kuputusan Keberatan / Non Keberatan</a>
                         <?php } else {?>
-                            <a style="width: 15px;border-radius:10px;padding:5px" disabled>Anda tidak diperbolehkan untuk melakukan update!</a>
+                            <a style="width: 15px;border-radius:10px;padding:5px" disabled>Anda tidak diperbolehkan untuk melakukan Manage!</a>
                         <?php } ?>
                   </div>
 
@@ -315,7 +316,7 @@ f<?php $request = \Config\Services::request(); ?>
                             <?php
                             if($session->get('PENUserLevel')=="Editor"){
                             ?>
-                            <th>Action</th>
+                            <th>Edit</th>
                             <?php
                             }
                             ?>
@@ -338,10 +339,7 @@ f<?php $request = \Config\Services::request(); ?>
                             <td>
                                 <div class="btn-group">
 
-                                    <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditJP" id="id_jp" vid=""> <i class="fas fa-pencil-alt"></i></a>&nbsp;
-
-
-                                    <a href="<?php echo base_url('SetDB/deleteJP/'); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus')" title="Delete Account"><i class="fas fa-backspace"></i></a>
+                                    <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditKP" id="id_KP" vid="<?= $row['KPid'] ?>"> <i class="fas fa-pencil-alt"></i></a>
                                 </div>
                             </td>
                             <?php
@@ -349,7 +347,9 @@ f<?php $request = \Config\Services::request(); ?>
                             ?>
 
                         </tr>
-                      <?php } ?>
+                      <?php 
+                      } 
+                      ?>
 
                     </tbody>
                 </table>
@@ -361,7 +361,49 @@ f<?php $request = \Config\Services::request(); ?>
         <?php
         }
         ?>
-        
+        <!-- For Editor -->
+        <!-- Edit Ketetapan Pajak -->
+        <div class="modal fade bd-example-modal-sm" id="ModalEditKP" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Ketetapan Pajak</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <form action="<?php echo base_url()?>/pengajuan/UpdateKetetapanPajak" method="post">
+                    <!-- Add -->
+                    <input type="hidden" name="idKP" id="idKP">
+                    <input type="hidden" name="idKPajuanId" id="idKPajuanId">
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Jenis Ketetapan</label>
+                        <div class="col-md-7"><input type="text" class="form-control" name="jenis_KP" id="id_JKP" readonly></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">No. Ketetapan</label>
+                        <div class="col-md-7"><input type="text" class="form-control" name="no_KP" id="id_NoKP"></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Tanggal Ketetapan</label>
+                        <div class="col-md-7"><input type="text" class="form-control" name="tgl_KP" id="id_tglKP"></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Nilai Ketetapan</label>
+                        <div class="col-md-7"><input type="text" class="form-control" name="nilai_KP" id="id_NKP"></div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Close</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save </button>
+                      </div>
+                   </form>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
       <!-- </div> -->
           <!-- /.card-body -->
         <!-- /.card -->
@@ -394,7 +436,7 @@ f<?php $request = \Config\Services::request(); ?>
                             <?php
                             if($session->get('PENUserLevel')=="Editor"){
                             ?>
-                            <th>Action</th>
+                            <th>Edit</th>
                             <?php
                             }
                             ?>
@@ -418,10 +460,7 @@ f<?php $request = \Config\Services::request(); ?>
                             <td>
                                 <div class="btn-group">
 
-                                    <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditJP" id="id_jp" vid=""> <i class="fas fa-pencil-alt"></i></a>&nbsp;
-
-
-                                    <a href="<?php echo base_url('SetDB/deleteJP/'); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus')" title="Delete Account"><i class="fas fa-backspace"></i></a>
+                                    <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditPWP" id="id_PWP" vid="<?= $row['PWPid'] ?>"> <i class="fas fa-pencil-alt"></i></a>
                                 </div>
                             </td>
                             <?php
@@ -435,6 +474,48 @@ f<?php $request = \Config\Services::request(); ?>
             </div>
           </div>
           <!-- End Permohonan WP -->
+          <!-- Edit Modal Permohonan WP -->
+          <div class="modal fade bd-example-modal-sm" id="ModalEditPWP" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Permohonan WP</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="<?php echo base_url()?>/pengajuan/UpdatePWP" method="post">
+                      <!-- Add -->
+                      <input type="hidden" name="idPWP" id="idPWP">
+                      <input type="hidden" name="idPWPajuan" id="idPWPajuan">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">No Surat WP</label>
+                            <div class="col-md-7"><input type="text" class="form-control" name="NoPWP" id="id_NoPWP"></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Tanggal Surat WP</label>
+                            <div class="col-md-7"><input type="text" class="form-control" name="TglPWP" id="id_TglPWP"></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">No LPAD</label>
+                            <div class="col-md-7"><input type="text" class="form-control" name="NoLPAD" id="id_NoLPAD"></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Tanggal LPAD</label>
+                            <div class="col-md-7"><input type="text" class="form-control" name="TglLPAD" id="id_TglLPAD"></div>
+                        </div>
+                      
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Close</button>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save </button>
+                        </div>
+                     </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <!-- Endi Edit Modal Permohonan WP -->
         <?php
         }
         ?>
@@ -472,7 +553,7 @@ f<?php $request = \Config\Services::request(); ?>
                           <?php
                           if($session->get('PENUserLevel')=="Editor"){
                           ?>
-                          <th>Action</th>
+                          <th>Editor</th>
                           <?php
                           }
                           ?>
@@ -495,10 +576,7 @@ f<?php $request = \Config\Services::request(); ?>
                           <td>
                               <div class="btn-group">
 
-                                  <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditJP" id="id_jp" vid=""> <i class="fas fa-pencil-alt"></i></a>&nbsp;
-
-
-                                  <a href="<?php echo base_url('SetDB/deleteJP/'); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus')" title="Delete Account"><i class="fas fa-backspace"></i></a>
+                                  <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditPKPP" id="id_PKPP" vid="<?= $row['PKPPid'] ?>"> <i class="fas fa-pencil-alt"></i></a>
                               </div>
                           </td>
                           <?php
@@ -511,7 +589,45 @@ f<?php $request = \Config\Services::request(); ?>
             </div>
           </div>
         </div>       
-        <!--  -->
+        <!-- End -->
+        <!-- Modal Pengantar KPP -->
+        <div class="modal fade bd-example-modal-sm" id="ModalEditPKPP" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Pengantar KPP</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <form action="<?php echo base_url()?>/pengajuan/updatePKPP" method="post">
+                    <!-- Add -->
+                    <input type="hidden" name="idPKPP" id="idPKPP">
+                    <input type="hidden" name="idPKPPajuan" id="idPKPPajuan">
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">No. Surat Pengantar</label>
+                        <div class="col-md-7"><input type="text" class="form-control" name="no_SP" id="id_NoSP"></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Tgl. Surat Pengantar</label>
+                        <div class="col-md-7"><input type="text" class="form-control" name="tgl_SP" id="id_TglSP"></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Tgl. Terima Kanwil</label>
+                        <div class="col-md-7"><input type="text" class="form-control" name="tgl_TerimaK" id="id_TglTK"></div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Close</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save </button>
+                      </div>
+                   </form>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Pengantar KPP -->
       <?php
       }
       ?> 
@@ -548,7 +664,7 @@ f<?php $request = \Config\Services::request(); ?>
                           <?php
                           if($session->get('PENUserLevel')=="Editor"){
                           ?>
-                          <th>Action</th>
+                          <th>Edit</th>
                           <?php
                           }
                           ?>
@@ -570,10 +686,7 @@ f<?php $request = \Config\Services::request(); ?>
                           <td>
                               <div class="btn-group">
 
-                                  <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditJP" id="id_jp" vid=""> <i class="fas fa-pencil-alt"></i></a>&nbsp;
-
-
-                                  <a href="<?php echo base_url('SetDB/deleteJP/'); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus')" title="Delete Account"><i class="fas fa-backspace"></i></a>
+                                  <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditST" id="id_ST" vid="<?= $row['STid'] ?>"> <i class="fas fa-pencil-alt"></i></a>
                               </div>
                           </td>
                           <?php
@@ -587,6 +700,44 @@ f<?php $request = \Config\Services::request(); ?>
           </div>
         </div>
         <!-- End Surat Tugas -->
+        <!-- Modal Edit Surat Tugas -->
+        <div class="modal fade bd-example-modal-sm" id="ModalEditST" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Surat Tugas</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <form action="<?php echo base_url()?>/pengajuan/updateST" method="post">
+                    <!-- Add -->
+                    <input type="hidden" name="idST" id="idST">
+                    <input type="hidden" name="idSTajuan" id="idSTajuan">
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">No. Surat Tugas</label>
+                        <div class="col-md-7"><input type="text" class="form-control" name="no_ST" id="id_NoST"></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Tgl. Surat Tugas</label>
+                        <div class="col-md-7"><input type="text" class="form-control" name="tgl_ST" id="id_TglST"></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Assign Peneliti</label>
+                        <div class="col-md-7"><input type="text" class="form-control" name="APeneliti" id="id_APeneliti" readonly></div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Close</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save </button>
+                      </div>
+                   </form>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
       <?php
       }
       ?>
@@ -647,11 +798,7 @@ f<?php $request = \Config\Services::request(); ?>
                           ?>
                           <td>
                               <div class="btn-group">
-
-                                  <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditJP" id="id_jp" vid=""> <i class="fas fa-pencil-alt"></i></a>&nbsp;
-
-
-                                  <a href="<?php echo base_url('SetDB/deleteJP/'); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus')" title="Delete Account"><i class="fas fa-backspace"></i></a>
+                                  <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditFormal" id="id_Formal" vid="<?= $row['FMid']?>"> <i class="fas fa-pencil-alt"></i></a>
                               </div>
                           </td>
                           <?php
@@ -665,13 +812,43 @@ f<?php $request = \Config\Services::request(); ?>
           </div>
         </div>
       <!-- End Formal Metrix -->
+      <!-- Edit Modal Formal Matrix -->
+      <div class="modal fade bd-example-modal-sm" id="ModalEditFormal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Formal Matrix YA</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <form action="<?php echo base_url()?>/pengajuan/updateFM" method="post">
+                  <!-- Add -->
+                  <input type="hidden" name="idFM" id="idFM">
+                  <input type="hidden" name="idFMajuan" id="idFMajuan">
+                  <div class="form-group row">
+                      <label class="col-sm-5 col-form-label">Formal Matrix</label>
+                      <div class="col-md-7"><input type="text" class="form-control" name="formal_Ya" id="id_FMisFormal" readonly></div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-sm-5 col-form-label">Tgl. Matrix</label>
+                      <div class="col-md-7"><input type="text" class="form-control" name="tgl_matrix" id="id_FMtglMatrik"></div>
+                  </div>
+                  
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Close</button>
+                      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save </button>
+                    </div>
+                 </form>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Edit Formal Matrix -->
       <?php
       }
       ?>
-
-        
-          <!-- /.card-body -->
-        <!-- /.card -->
     <!-- ./Formal/Matrik -->
     
 
@@ -723,11 +900,7 @@ f<?php $request = \Config\Services::request(); ?>
                             ?>
                             <td>
                                 <div class="btn-group">
-
-                                    <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditJP" id="id_jp" vid=""> <i class="fas fa-pencil-alt"></i></a>&nbsp;
-
-
-                                    <a href="<?php echo base_url('SetDB/deleteJP/'); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus')" title="Delete Account"><i class="fas fa-backspace"></i></a>
+                                    <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditPSKPP" id="id_PSKPP" vid="<?= $row['PSKPPid']?>"> <i class="fas fa-pencil-alt"></i></a>
                                 </div>
                             </td>
                             <?php
@@ -741,6 +914,40 @@ f<?php $request = \Config\Services::request(); ?>
           </div>
         </div>
       <!-- End Permintaan Surat KPP -->
+      <!-- Edit Modal Permintaan Surat KPP -->
+      <div class="modal fade bd-example-modal-sm" id="ModalEditPSKPP" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Permintaan Surat KPP</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <form action="<?php echo base_url()?>/pengajuan/updatePSKPP" method="post">
+                  <!-- Add -->
+                  <input type="hidden" name="idPSKPP" id="idPSKPP">
+                  <input type="hidden" name="idPSKPPajuan" id="idPSKPPajuan">
+                  <div class="form-group row">
+                      <label class="col-sm-5 col-form-label">No. Surat Ke KPP</label>
+                      <div class="col-md-7"><input type="text" class="form-control" name="vPSKPPNoSurat" id="id_PSKPPNoSurat"></div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-sm-5 col-form-label">Tgl Surat Ke KPP</label>
+                      <div class="col-md-7"><input type="text" class="form-control" name="vPSKPPtglSurat" id="id_PSKPPtglSurat"></div>
+                  </div>
+                  
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Close</button>
+                      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save </button>
+                    </div>
+                 </form>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- End -->
       <?php
       }
       ?>
@@ -939,6 +1146,77 @@ f<?php $request = \Config\Services::request(); ?>
     <?php
     }
     ?>
+    <!-- Pencabutan Permohonan -->
+    <?php
+    $session = session();
+    if($session->get('PENUserLevel')=="Level1-Peneliti" OR $session->get('PENUserLevel')=="Editor"){
+    ?>
+    <!-- Pencabutan Permohonan Oleh WP -->
+      <div class="card card-header">
+        <div class="card-header">
+          <h3 class="card-title">Pencabutan WP</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <!-- table Pencabutan Permohonan -->
+          <div class="table-responsive">
+            <table class="table  table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>No Pencabutan</th>
+                        <th>Tanggal Pencabutan <i>(d/m/Y)</i></th>
+                        <?php
+                        if($session->get('PENUserLevel')=="Editor"){
+                        ?>
+                        <th>Action</th>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                  <?php
+                  $no = 1;
+                  foreach($mpencabutanpermohonan as $row) {
+                  ?>
+                    <tr>
+                        <td><?= $no++ ?></td>
+                        <td><?= $row['QuitWPnoSurat'] ?></td>
+                        <td><?= date('d/m/Y', strtotime($row['QuitWPtglSurat']))?></td>
+                        <?php
+                        if($session->get('PENUserLevel')=="Editor"){
+                        ?>
+                        <td>
+                            <div class="btn-group">
+
+                                <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditJP" id="id_jp" vid=""> <i class="fas fa-pencil-alt"></i></a>&nbsp;
+
+
+                                <a href="<?php echo base_url('SetDB/deleteJP/'); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus')" title="Delete Account"><i class="fas fa-backspace"></i></a>
+                            </div>
+                        </td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+                  <?php } ?>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    <!-- End Pencabutan Permohonan Oleh WP -->
+    <?php
+    }
+    ?>
+    
     <!-- Laporan Penelitian -->
     <?php
     $session = session();
@@ -1008,78 +1286,6 @@ f<?php $request = \Config\Services::request(); ?>
     <?php
     }
     ?>
-
-    <!-- Pencabutan Permohonan -->
-    <?php
-    $session = session();
-    if($session->get('PENUserLevel')=="Level1-Peneliti" OR $session->get('PENUserLevel')=="Editor"){
-    ?>
-    <!-- Pencabutan Permohonan Oleh WP -->
-      <div class="card card-header">
-        <div class="card-header">
-          <h3 class="card-title">Pencabutan Permohonan Oleh WP</h3>
-
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-          </div>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-          <!-- table Pencabutan Permohonan -->
-          <div class="table-responsive">
-            <table class="table  table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>No Pencabutan</th>
-                        <th>Tanggal Pencabutan <i>(d/m/Y)</i></th>
-                        <?php
-                        if($session->get('PENUserLevel')=="Editor"){
-                        ?>
-                        <th>Action</th>
-                        <?php
-                        }
-                        ?>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                  <?php
-                  $no = 1;
-                  foreach($mpencabutanpermohonan as $row) {
-                  ?>
-                    <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= $row['QuitWPnoSurat'] ?></td>
-                        <td><?= date('d/m/Y', strtotime($row['QuitWPtglSurat']))?></td>
-                        <?php
-                        if($session->get('PENUserLevel')=="Editor"){
-                        ?>
-                        <td>
-                            <div class="btn-group">
-
-                                <a href="" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalEditJP" id="id_jp" vid=""> <i class="fas fa-pencil-alt"></i></a>&nbsp;
-
-
-                                <a href="<?php echo base_url('SetDB/deleteJP/'); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus')" title="Delete Account"><i class="fas fa-backspace"></i></a>
-                            </div>
-                        </td>
-                        <?php
-                        }
-                        ?>
-                    </tr>
-                  <?php } ?>
-                </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    <!-- End Pencabutan Permohonan Oleh WP -->
-    <?php
-    }
-    ?>
-        
 
     <!-- Keputusan Keberatan -->
     <?php
@@ -2122,7 +2328,6 @@ f<?php $request = \Config\Services::request(); ?>
 </div>
 <script>
     $(document).ready(function() {
-
     $('#label_new_field').hide();
     $('#label_no_keputusan1').hide();
     $('#label_tgl_keputusan1').hide();
@@ -2521,6 +2726,145 @@ f<?php $request = \Config\Services::request(); ?>
         });
         return false;
     });
+    // Edit Modal Jenis Ketetapan
+    $(document).on('click', '#id_KP', function() {
+        var id=$(this).attr('vid');
+        console.log(id);
+        $.ajax({
+            url : "<?php echo site_url('pengajuan/EditKP');?>",
+            method : "POST",
+            data : {id: id},
+            async : true,
+            dataType : 'json',
+            success: function(data){   
+                for(i=0; i<data.length; i++){
+                    $('#idKPajuanId').val(data[i].KPajuanId);
+                    $('#idKP').val(data[i].KPid);
+                    $('#id_JKP').val(data[i].JKnama);
+                    $('#id_NoKP').val(data[i].KPNoKetetapan);
+                    $('#id_tglKP').val(data[i].KPTgl);
+                    $('#id_NKP').val(data[i].KPNilai);
+                }
+            }
+        });
+        return false;
+    });
+    // Edit Modal Surat Permohonan WP
+    $(document).on('click', '#id_PWP', function() {
+        var id=$(this).attr('vid');
+        //console.log(id);
+        $.ajax({
+            url : "<?php echo site_url('pengajuan/EditPWP');?>",
+            method : "POST",
+            data : {id: id},
+            async : true,
+            dataType : 'json',
+            success: function(data){   
+                for(i=0; i<data.length; i++){
+                    $('#idPWPajuan').val(data[i].PWPajuanId);
+                    $('#idPWP').val(data[i].PWPid );
+                    $('#id_NoPWP').val(data[i].PWPnoSurat);
+                    $('#id_TglPWP').val(data[i].PWPtglSurat);
+                    $('#id_NoLPAD').val(data[i].PWPnoLPAD);
+                    $('#id_TglLPAD').val(data[i].PWPtglLPAD);
+                }
+            }
+        });
+        return false;
+    });
+    //Edit Modal Pengantar KPP
+    $(document).on('click', '#id_PKPP', function() {
+        var id=$(this).attr('vid');
+        $.ajax({
+            url : "<?php echo site_url('pengajuan/EditPKPP');?>",
+            method : "POST",
+            data : {id: id},
+            async : true,
+            dataType : 'json',
+            success: function(data){   
+                for(i=0; i<data.length; i++){
+                    $('#idPKPPajuan').val(data[i].PKPPajuanId);
+                    $('#idPKPP').val(data[i].PKPPid);
+                    $('#id_NoSP').val(data[i].PKPPnoSurat);
+                    $('#id_TglSP').val(data[i].PKPPtglSurat);
+                    $('#id_TglTK').val(data[i].PKPPtglDiterima);
+                }
+            }
+        });
+        return false;
+    });
+    //Edit Modal Surat Tugas
+    $(document).on('click', '#id_ST', function() {
+        var id=$(this).attr('vid');
+        //console.log(id);
+        $.ajax({
+            url : "<?php echo site_url('pengajuan/EditST');?>",
+            method : "POST",
+            data : {id: id},
+            async : true,
+            dataType : 'json',
+            success: function(data){   
+
+                for(i=0; i<data.length; i++){
+                    $('#idSTajuan').val(data[i].STajuanId);
+                    $('#idST').val(data[i].STid);
+                    $('#id_NoST').val(data[i].STnoSurat);
+                    $('#id_TglST').val(data[i].STtglSurat);
+                    $('#id_APeneliti').val(data[i].PENNama);
+                }
+            }
+        });
+        return false;
+    });
+    //Edit Modal Formal Matrix
+    $(document).on('click', '#id_Formal', function() {
+        var id=$(this).attr('vid');
+        //console.log(id);
+        $.ajax({
+            url : "<?php echo site_url('pengajuan/EditFM');?>",
+            method : "POST",
+            data : {id: id},
+            async : true,
+            dataType : 'json',
+            success: function(data){   
+
+                for(i=0; i<data.length; i++){
+                    $('#idFMajuan').val(data[i].FMajuanId);
+                    $('#idFM').val(data[i].FMid);
+                    $('#id_FMisFormal').val(data[i].FMisFormal);
+                    $('#id_FMtglMatrik').val(data[i].FMtglMatrik);
+                }
+            }
+        });
+        return false;
+    });
+    
+    //Edit Modal Permintaan Surat KPP
+    $(document).on('click', '#id_PSKPP', function() {
+        var id=$(this).attr('vid');
+        //console.log(id);
+        $.ajax({
+            url : "<?php echo site_url('pengajuan/EditPSKPP');?>",
+            method : "POST",
+            data : {id: id},
+            async : true,
+            dataType : 'json',
+            success: function(data){   
+
+                for(i=0; i<data.length; i++){
+                    $('#idPSKPPajuan').val(data[i].PSKPPajuanId);
+                    $('#idPSKPP').val(data[i].PSKPPid );
+                    $('#id_PSKPPNoSurat').val(data[i].PSKPPNoSurat);
+                    $('#id_PSKPPtglSurat').val(data[i].PSKPPtglSurat);
+                }
+            }
+        });
+        return false;
+    });
+
+
+
+    // End
     } );
 
 

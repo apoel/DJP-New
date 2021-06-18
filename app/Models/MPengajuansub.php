@@ -36,6 +36,14 @@ class MPengajuansub extends Model
 	// }
 
 	//getTujuanResponKanwil
+	public function getListArsip($id=false)
+	{
+		 return $this->db->table('SUBArsip')
+                        ->get()
+                        ->getResultArray();
+	}
+
+	//getTujuanResponKanwil
 	public function getTujuanResponKanwil($id=false)
 	{
 		 return $this->db->table('jenistujuanrespon')

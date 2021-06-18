@@ -1,4 +1,8 @@
-<?php $request = \Config\Services::request(); ?>
+<?php 
+$request = \Config\Services::request(); 
+$session = session();
+?>
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?php echo base_url($request->uri->getSegment(1));?>" class="brand-link">
@@ -43,10 +47,13 @@
                         
                     </a>
                 </li>
-         
-                
                 <!-- end dashboard -->
+
+                <!-- Access for Level1 Admin & Editor -->
                 <li class="nav-header"><i class="nav-icon fas fa-th"></i> MENU</li>
+                <?php 
+                if($session->get('PENUserLevel')=="Level1-Admin" OR $session->get('PENUserLevel')=="Level1-Peneliti"OR $session->get('PENUserLevel')=="Editor"){
+                ?>
                 <li class="nav-item">
                     <!-- <a href="pages/layout/collapsed-sidebar.html" class="nav-link"> -->
                         <a href="<?php echo base_url()."/pengajuan"?>" class="nav-link">
@@ -54,6 +61,14 @@
                             <p>Pengajuan</p>
                         </a>
                 </li>
+                <?php
+                }
+                ?>
+                
+                <!-- Access for Level1 Peneliti & Editor-->
+                <?php 
+                if($session->get('PENUserLevel')=="Level1-Peneliti" OR $session->get('PENUserLevel')=="Editor"){
+                ?>
                 <li class="nav-item">
                         <a href="<?php echo base_url()."/pengajuansub"?>" class="nav-link">
                             <i class="nav-icon far fa-file-alt"></i>
@@ -66,11 +81,18 @@
                             <p>STG</p>
                         </a>
                 </li>
+                <?php
+                }
+                ?>
+                <!-- Level2 # Edit Reference table & user-->
+                <?php 
+                if($session->get('PENUserLevel')=="Level2"){
+                ?>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="fas fa-cogs"></i>
                         <p>
-                            Setting Database
+                            Configuration Reff.
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -78,27 +100,52 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url()."/SetDB/JenisPermohonan"?>" class="nav-link">
                                 <i class="far fa-dot-circle nav-icon"></i>
-                                <p>Jenis Permohonan</p>
+                                <p>L1A-Jenis Permohonan</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo base_url()."/SetDB/JenisPajak"?>" class="nav-link">
                                 <i class="far fa-dot-circle nav-icon"></i>
-                                <p>Jenis Pajak</p>
+                                <p>L1A-Jenis Pajak</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url()."/SetDB/MataUang"?>" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>L1A-Mata Uang</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo base_url()."/SetDB/JenisKetepan"?>" class="nav-link">
                                 <i class="far fa-dot-circle nav-icon"></i>
-                                <p>Jenis Ketetapan</p>
+                                <p>L1A-Jenis Ketetapan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url()."/SetDB/SubSTGPajak"?>" class="nav-link">
+                            <a href="<?php echo base_url()."/SetDB/JenisEkspedisi"?>" class="nav-link">
                                 <i class="far fa-dot-circle nav-icon"></i>
-                                <p>SUBSTG Pajak</p>
+                                <p>L1P-Ekspedisi</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url()."/SetDB/Keputusan"?>" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>L1P-Keputusan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url()."/SetDB/TujuanRespon"?>" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>L1P-Tujuan Respon Kanwil</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url()."/SetDB/SetArsip"?>" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>L1P-SUBArsip</p>
+                            </a>
+                        </li>
+                        
                     </ul>
                 </li>
                 <!-- <li class="nav-header"><i class="fas fa-user-cog"></i>  Setting User</li> -->
@@ -125,7 +172,10 @@
                                 </li>
                             </ul>
                 </li>
-                <li class="nav-header"><i class="fas fa-cogs"></i>  Navigation User</li>
+                <?php
+                }
+                ?>
+
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="fas fa-unlock-alt"></i>

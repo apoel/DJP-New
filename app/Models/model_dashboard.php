@@ -30,10 +30,15 @@ class model_dashboard extends Model
 		return $result->getRow();
 	}
 
+	public function getPengajuanSUBClosing()
+	{
+		$result = $this->db->query("SELECT count(*) as closing FROM pengajuansub WHERE ajuanStatusAkhir != '' AND ajuanSUBjenisPermintaan = 'SUB'");
+		return $result->getRow();
+	}
 
 	public function getPengajuanSTGClosing()
 	{
-		$result = $this->db->query("SELECT count(*) as closing FROM pengajuansub WHERE ajuanStatusAkhir != ''");
+		$result = $this->db->query("SELECT count(*) as closing FROM pengajuansub WHERE ajuanStatusAkhir != '' AND ajuanSUBjenisPermintaan = 'STG'");
 		return $result->getRow();
 	}
 
@@ -59,43 +64,90 @@ class model_dashboard extends Model
 		return $result->getResultArray();
 	}
 
-	//Pengajuan SUBSTG
-	public function getTotalPengajuanSTG()
+	//Pengajuan SUB
+	public function getTotalPengajuanSUB()
 	{
-		$result = $this->db->query("SELECT count(*) as total_pengajuan FROM pengajuansub");
+		$result = $this->db->query("SELECT count(*) as total_pengajuan FROM pengajuansub WHERE ajuanSUBjenisPermintaan = 'SUB'");
 		return $result->getRow();
 	}
 
+	//Pengajuan STG
+	public function getTotalPengajuanSTG()
+	{
+		$result = $this->db->query("SELECT count(*) as total_pengajuan FROM pengajuansub WHERE ajuanSUBjenisPermintaan = 'STG'");
+		return $result->getRow();
+	}
+
+	//SUB
 	public function getPengajuanLateSub()
 	{
-		$result = $this->db->query("SELECT count(*) as Late FROM v_pengajuansub WHERE status_open LIKE 'Lewat Wakt%'");
+		$result = $this->db->query("SELECT count(*) as Late FROM v_pengajuansub WHERE status_open LIKE 'Lewat Wakt%' AND ajuanSUBjenisPermintaan = 'SUB'");
+		return $result->getRow();
+	}
+
+	//STG
+	public function getPengajuanLateSTG()
+	{
+		$result = $this->db->query("SELECT count(*) as Late FROM v_pengajuansub WHERE status_open LIKE 'Lewat Wakt%' AND ajuanSUBjenisPermintaan = 'STG'");
 		return $result->getRow();
 	}
 
 	//Pengajuan SUBSTG
 	public function getDashboardPengajuanClosingsub()
 	{
-		$result = $this->db->query("SELECT * FROM pengajuansub WHERE ajuanStatusAkhir != ''");
+		$result = $this->db->query("SELECT * FROM pengajuansub WHERE ajuanStatusAkhir != '' AND ajuanSUBjenisPermintaan = 'SUB'");
 		return $result->getResultArray();
 	}
 
+	
+	public function getDashboardPengajuanClosingstg()
+	{
+		$result = $this->db->query("SELECT * FROM pengajuansub WHERE ajuanStatusAkhir != '' AND ajuanSUBjenisPermintaan = 'STG'");
+		return $result->getResultArray();
+	}
+	//SUB Alert
 	public function getPengajuanSubAlert()
 	{
-		$result = $this->db->query("SELECT count(*) as Alert FROM v_pengajuansub WHERE status_open LIKE 'Sebelum IKU%'");
+		$result = $this->db->query("SELECT count(*) as Alert FROM v_pengajuansub WHERE status_open LIKE 'Sebelum IKU%' AND ajuanSUBjenisPermintaan = 'SUB'");
 		return $result->getRow();
 	}
 
+	//STG Alert
+	public function getPengajuanSTGAlert()
+	{
+		$result = $this->db->query("SELECT count(*) as Alert FROM v_pengajuansub WHERE status_open LIKE 'Sebelum IKU%' AND ajuanSUBjenisPermintaan = 'STG'");
+		return $result->getRow();
+	}
+
+	//Alert SUB
 	public function getDashboardPengajuanAlertSub()
 	{
 
-		$result = $this->db->query("SELECT * FROM v_pengajuansub WHERE status_open LIKE 'Sebelum IKU%'");
+		$result = $this->db->query("SELECT * FROM v_pengajuansub WHERE status_open LIKE 'Sebelum IKU%' AND ajuanSUBjenisPermintaan = 'SUB'");
 		return $result->getResultArray();
 	}
 
+	//Alert STG
+	public function getDashboardPengajuanAlertStg()
+	{
+
+		$result = $this->db->query("SELECT * FROM v_pengajuansub WHERE status_open LIKE 'Sebelum IKU%' AND ajuanSUBjenisPermintaan = 'STG'");
+		return $result->getResultArray();
+	}
+
+	//Late SUB
 	public function getDashboardPengajuanLateSub()
 	{
 
-		$result = $this->db->query("SELECT * FROM v_pengajuansub WHERE status_open LIKE 'Lewat Waktu%'");
+		$result = $this->db->query("SELECT * FROM v_pengajuansub WHERE status_open LIKE 'Lewat Waktu%' AND ajuanSUBjenisPermintaan = 'SUB'");
+		return $result->getResultArray();
+	}
+
+	//Late STG
+	public function getDashboardPengajuanLateStg()
+	{
+
+		$result = $this->db->query("SELECT * FROM v_pengajuansub WHERE status_open LIKE 'Lewat Waktu%' AND ajuanSUBjenisPermintaan = 'STG'");
 		return $result->getResultArray();
 	}
 

@@ -78,7 +78,7 @@
 
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="far fa-bell"></i></span>
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-exclamation"></i></span>
 
                 <div class="info-box-content">
                   <span class="info-box-text"><a href="<?php echo base_url('dashboard/detail_alert')?>" class="small-box-footer"> Alert <i class="fas fa-arrow-circle-right"></i></a></span>
@@ -114,7 +114,7 @@
         </div>
 
    <!--      <div class="card-header">
-        Pengajuan SUB STG
+        Pengajuan SUB
         </div> -->
         <div class="container-fluid">
           <!-- Info boxes Pengajuan Sub STG-->
@@ -124,9 +124,9 @@
                 <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-archway"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text"><a href="<?php echo base_url()."/pengajuansub"?>" class="small-box-footer">SUB STG <i class="fas fa-arrow-circle-right"></i></a></span>
+                  <span class="info-box-text"><a href="<?php echo base_url()."/pengajuansub"?>" class="small-box-footer">SUB <i class="fas fa-arrow-circle-right"></i></a></span>
                   <span class="info-box-number">
-                    <?= $getPengajuanSTG->total_pengajuan; ?>
+                    <?= $getPengajuanSUB->total_pengajuan; ?>
                   </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -137,12 +137,12 @@
 
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-store-alt-slash"></i></span>
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-eye-slash"></i></span>
 
                 <div class="info-box-content">
                   <span class="info-box-text"><a href="<?php echo base_url('dashboard/detail_closingsub')?>" class="small-box-footer">Closing <i class="fas fa-arrow-circle-right"></i></a></span>
                   <span class="info-box-number">
-                     <?= $getPengajuanSTGClosing->closing; ?>
+                     <?= $getPengajuanSUBClosing->closing; ?>
                   </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -189,7 +189,83 @@
           </div>
           <!-- /.row Pengajuan SubStg-->
 
-        </div>
+        </div> <!-- End SUB-->
+        <!-- STG -->
+        <div class="container-fluid">
+          <!-- Info boxes Pengajuan STG-->
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box"> 
+                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-align-justify"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text"><a href="<?php echo base_url()."/stg"?>" class="small-box-footer">STG <i class="fas fa-arrow-circle-right"></i></a></span>
+                  <span class="info-box-number">
+                    <?= $getPengajuanSTG->total_pengajuan; ?>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-crop"></i></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text"><a href="<?php echo base_url('dashboard/detail_closingstg')?>" class="small-box-footer">Closing <i class="fas fa-arrow-circle-right"></i></a></span>
+                  <span class="info-box-number">
+                     <?= $getPengajuanSTGClosing->closing; ?>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-exclamation-triangle"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text"><a href="<?php echo base_url('dashboard/detail_alertstg')?>" class="small-box-footer"> Alert <i class="fas fa-arrow-circle-right"></i></a></span>
+                  <span class="info-box-number">
+                    <?= $getPengajuanSTGAlert->Alert; ?>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-backspace"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text"><a href="<?php echo base_url('dashboard/detail_latestg')?>" class="small-box-footer">Terlambat  <i class="fas fa-arrow-circle-right"></i></a></span>
+                  <span class="info-box-number">
+                    <?= $getPengajuanLateSub->Late; ?>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            
+            
+          </div>
+          <!-- /.row Pengajuan SubStg-->
+
+        </div> <!-- End SUB-->
+        <!-- end stg -->
       </section> <!--End mail content-->
 
     </div> <!-- /.box -->

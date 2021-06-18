@@ -11,7 +11,7 @@
             </div>
         </div> <!--end card header-->
         <div class="container">
-	      
+	        
 	        <br><br>
 	        <div class="table-responsive">
 	            <table class="table table-bordered table-striped" id="myTablePengajuan">
@@ -23,7 +23,7 @@
 	                        <th>NOP</th>
 	                        <th>Jenis Permohonan</th>
 	                        <th>Jenis Pajak</th>
-	                        <th>Alert</th>
+	                        <th>Status Akhir</th>
 	                        <th>Detail</th>
 	                    </tr>
 	                </thead>
@@ -31,7 +31,7 @@
 	                <tbody>
 	                    <?php 
 	                    $no = 1;
-	                    foreach($detail_alertsub as $data) { 
+	                    foreach($detail_latestg as $data) { 
 	                    ?>
 	                    <tr>
 	                        <td><?php echo $no++ ?></td>
@@ -66,5 +66,6 @@
 	function goBack() {
         window.history.back();
     }
+
 </script>
 <?= $this->endSection() ?>

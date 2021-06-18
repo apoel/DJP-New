@@ -37,6 +37,7 @@ class Stg extends Controller
 		$data['jenispajakstg'] = $model->get_jenispajakstg();
 		//$data['substg'] = $model->get_substg();
 		$data['AlertSTG'] = $model->getAlertSUBSTG("STG");
+		$data['list_matauang'] = $model->get_MataUang();
 
 		
 		// $data['detail_pengajuan'] = $model->getDetailPengajuan()->getResult();

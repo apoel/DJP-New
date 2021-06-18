@@ -71,6 +71,7 @@ class Pengajuansub extends Controller
 		$data['list_suratbanding'] = $this->pengajuansub->getSuratBanding();
 		$data['list_KPjenis'] = $this->pengajuansub->getKPjenis();
 		$data['list_tujuanRespon'] = $this->pengajuansub->getTujuanResponKanwil();
+		$data['list_arsip'] = $this->pengajuansub->getListArsip();
 
 		
 		//$data['mpermohonanwp'] = $this->pengajuan->get_PermohonanWP($id);

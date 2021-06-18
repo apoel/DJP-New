@@ -11,12 +11,7 @@
             </div>
         </div> <!--end card header-->
         <div class="container">
-			<p>
-				<button type="button" class="btn btn-secondary float-left ml-2 mt-2" onclick="goBack()">Back</button>
-	            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#ModalPengajuan"><i class="fas fa-plus-circle"></i>
-	              Permohonan KBP 
-	            </button>
-	        </p>
+			
 	        <br><br>
 	        <div class="table-responsive">
 	            <table class="table table-bordered table-striped" id="myTablePengajuan">

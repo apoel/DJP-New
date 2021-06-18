@@ -32,11 +32,16 @@ class Dashboard extends BaseController {
         $data['getPengajuanAlert'] = $dashboard->getPengajuanAlert();
         $data['getPengajuanLate'] = $dashboard->getPengajuanLate();
 
-        //Dashboard Pengajuan SUB/STG
-        $data['getPengajuanSTG'] = $dashboard->getTotalPengajuanSTG();
-        $data['getPengajuanSTGClosing'] = $dashboard->getPengajuanSTGClosing();
+        $data['getPengajuanSUB'] = $dashboard->getTotalPengajuanSUB();
+        $data['getPengajuanSUBClosing'] = $dashboard->getPengajuanSUBClosing();
         $data['getPengajuanSubAlert'] = $dashboard->getPengajuanSubAlert();
         $data['getPengajuanLateSub'] = $dashboard->getPengajuanLateSub();
+
+        //Dashboard Pengajuan STG
+        $data['getPengajuanSTG'] = $dashboard->getTotalPengajuanSTG();
+        $data['getPengajuanSTGClosing'] = $dashboard->getPengajuanSTGClosing();
+        $data['getPengajuanSTGAlert'] = $dashboard->getPengajuanSTGAlert();
+        $data['getPengajuanLateSTG'] = $dashboard->getPengajuanLateSTG();
         
         //detail dashboard
         //$data['detail_closing'] = $dashboard->detail_closing();
@@ -47,10 +52,14 @@ class Dashboard extends BaseController {
     //Pengajuan
     public function detail_closing() 
     {
-        $data['full_name'] = 'Mangapul';
-        $data['avatar'] = base_url().'/assets/dist/img/avatar.png';
-        $data['icon'] = 'ion ion-ios-toggle';
-        $data['title'] = 'Pengajuan Status Closing';
+        $session = session();
+        $data = [
+            'full_name' => $session->get('PENNama'),
+            'icon'      => 'ion ion-ios-toggle',
+            'title'     => 'Pengajuan Status Closing'
+        ];
+
+        
 
         $data['pengajuan_closing'] = $this->dashboard->getDashboardPengajuanClosing();
        
@@ -62,10 +71,12 @@ class Dashboard extends BaseController {
     //Pengajuan
     public function detail_alert() 
     {
-        $data['full_name'] = 'Mangapul';
-        $data['avatar'] = base_url().'/assets/dist/img/avatar.png';
-        $data['icon'] = 'ion ion-ios-toggle';
-        $data['title'] = 'Pengajuan Status Alert';
+        $session = session();
+        $data = [
+            'full_name' => $session->get('PENNama'),
+            'icon'      => 'ion ion-ios-toggle',
+            'title'     => 'Pengajuan Status Alert'
+        ];
 
         $data['detail_alert'] = $this->dashboard->getDashboardPengajuanAlert();
        
@@ -76,10 +87,12 @@ class Dashboard extends BaseController {
     //Pengajuan
     public function detail_late() 
     {
-        $data['full_name'] = 'Mangapul';
-        $data['avatar'] = base_url().'/assets/dist/img/avatar.png';
-        $data['icon'] = 'ion ion-ios-toggle';
-        $data['title'] = 'Pengajuan Status Terlambat';
+        $session = session();
+        $data = [
+            'full_name' => $session->get('PENNama'),
+            'icon'      => 'ion ion-ios-toggle',
+            'title'     => 'Pengajuan Status Terlambat'
+        ];
 
         $data['detail_late'] = $this->dashboard->getDashboardPengajuanLate();
        
@@ -87,13 +100,15 @@ class Dashboard extends BaseController {
         return view('dashboard/detail_late', $data);
     }
 
-    //Pengajuan SUB STG
+    //Pengajuan SUB
     public function detail_closingsub() 
     {
-        $data['full_name'] = 'Mangapul';
-        $data['avatar'] = base_url().'/assets/dist/img/avatar.png';
-        $data['icon'] = 'ion ion-ios-toggle';
-        $data['title'] = 'Pengajuan SUB/STG Status Closing';
+        $session = session();
+        $data = [
+            'full_name' => $session->get('PENNama'),
+            'icon'      => 'ion ion-ios-toggle',
+            'title'     => 'SUB Closing'
+        ];
 
         $data['pengajuan_closingsub'] = $this->dashboard->getDashboardPengajuanClosingsub();
        
@@ -102,13 +117,31 @@ class Dashboard extends BaseController {
 
     }
 
-    //Pengajuan SUB STG
+    
+    public function detail_closingstg() 
+    {
+        $session = session();
+        $data = [
+            'full_name' => $session->get('PENNama'),
+            'icon'      => 'ion ion-ios-toggle',
+            'title'     => 'STG Closing'
+        ];
+
+        $data['pengajuan_closingstg'] = $this->dashboard->getDashboardPengajuanClosingstg();
+       
+        //print_r($data);
+        return view('dashboard/pengajuan_closingstg', $data);
+
+    }
+    //Alert Sub
     public function detail_alertsub() 
     {
-        $data['full_name'] = 'Mangapul';
-        $data['avatar'] = base_url().'/assets/dist/img/avatar.png';
-        $data['icon'] = 'ion ion-ios-toggle';
-        $data['title'] = 'Pengajuan SUB/STG Status Alert';
+        $session = session();
+        $data = [
+            'full_name' => $session->get('PENNama'),
+            'icon'      => 'ion ion-ios-toggle',
+            'title'     => 'SUB Alert'
+        ];
 
         $data['detail_alertsub'] = $this->dashboard->getDashboardPengajuanAlertSub();
        
@@ -116,17 +149,52 @@ class Dashboard extends BaseController {
         return view('dashboard/detail_alertsub', $data);
     }
 
+    //Alert STG
+    public function detail_alertstg() 
+    {
+        $session = session();
+        $data = [
+            'full_name' => $session->get('PENNama'),
+            'icon'      => 'ion ion-ios-toggle',
+            'title'     => 'STG Alert'
+        ];
+
+        $data['detail_alertstg'] = $this->dashboard->getDashboardPengajuanAlertStg();
+       
+        //print_r($data);
+        return view('dashboard/detail_alertstg', $data);
+    }
+
+    //late sub
     public function detail_latesub() 
     {
-        $data['full_name'] = 'Mangapul';
-        $data['avatar'] = base_url().'/assets/dist/img/avatar.png';
-        $data['icon'] = 'ion ion-ios-toggle';
-        $data['title'] = 'Pengajuan SUB/STG Status Terlambat';
+
+        $session = session();
+        $data = [
+            'full_name' => $session->get('PENNama'),
+            'icon'      => 'ion ion-ios-toggle',
+            'title'     => 'SUB Terlambat'
+        ];
 
         $data['detail_latesub'] = $this->dashboard->getDashboardPengajuanLateSub();
        
         //print_r($data);
         return view('dashboard/detail_latesub', $data);
+    }
+
+    public function detail_latestg() 
+    {
+        $session = session();
+        $data = [
+            'full_name' => $session->get('PENNama'),
+            'icon'      => 'ion ion-ios-toggle',
+            'title'     => 'STG Terlambat'
+        ];
+
+        $data['detail_latestg'] = $this->dashboard->getDashboardPengajuanLateStg();
+       
+        //print_r($data);
+        return view('dashboard/detail_latestg', $data);
     }
 
 }

@@ -11,7 +11,7 @@
             </div>
         </div> <!--end card header-->
         <div class="container">
-	      
+	        
 	        <br><br>
 	        <div class="table-responsive">
 	            <table class="table table-bordered table-striped" id="myTablePengajuan">
@@ -31,7 +31,7 @@
 	                <tbody>
 	                    <?php 
 	                    $no = 1;
-	                    foreach($detail_alertsub as $data) { 
+	                    foreach($detail_alertstg as $data) { 
 	                    ?>
 	                    <tr>
 	                        <td><?php echo $no++ ?></td>

@@ -41,7 +41,7 @@ class Pengajuan extends Controller
 		$data['icon'] = 'ion ion-home';
 		$data['title'] = 'Pengajuan';
 
-		if($session->get('PENUserLevel') == "Level1-Admin"){
+		if($session->get('PENUserLevel') == "Level1-Admin" OR $session->get('PENUserLevel') == "Editor"){
 			$data['pengajuan'] = $model->getPengajuan()->getResult();
 		}else{
 			$data['pengajuan'] = $model->getPengajuanAssign($PENid)->getResult();
@@ -49,6 +49,7 @@ class Pengajuan extends Controller
 		
 		// $data['detail_pengajuan'] = $model->getDetailPengajuan()->getResult();
 		$data['jenis_permohonan'] = $model->get_jenisPermohonan()->getResult();
+		$data['list_matauang'] = $model->get_MataUang();
 		//$data['jenis_pajak'] = $model->get_jenisPajak($jenis_permohonan);
 		//$data['jenis_pajak'] = $model->get_jenisPajak()->getResult();
 
@@ -684,40 +685,212 @@ class Pengajuan extends Controller
 			return redirect()->to(base_url('pengajuan/detail_pengajuan/'.$id));
 		}
 
-		// $this->pengajuan->saveKeputusan($data);
-		// $this->pengajuan->closingpengajuan($data1,$id);		//closing
-		// session()->setFlashData('success','Keputusan berhasil di entri');
-		// return redirect()->to(base_url('pengajuan/detail_pengajuan/'.$id));
 	}
 
-	//closing dilakukan jika dilakukan pencabutan ATAU keputusan sudah di entri
-// 	public function closepengajuan()
-// 	{
+	//Edit for Editor
+	//Ajax Editor
 
-// 		$id = $this->request->uri->getSegment(3);
-// 		$vPencabutan = $this->pengajuan->checkPencabutan($id);
-// 		$vKeputusan = $this->pengajuan->checkKeputusan($id);
+	//1. Ketetapan Pajak
+	public function EditKP()
+	{
+		$id = service('request')->getPost('id');
+		//print_r($id);
+		$data = $this->pengajuan->get_IdKP($id);
+		echo json_encode($data);
+	}
+	//2. Surat Permohonan WP
+	public function EditPWP()
+	{
+		$id = service('request')->getPost('id');
+		//print_r($id);
+		$data = $this->pengajuan->get_IdPWP($id);
+		echo json_encode($data);
+	}
+	//3. Surat Pengantar KPP
+	public function EditPKPP()
+	{
+		$id = service('request')->getPost('id');
+		//print_r($id);
+		$data = $this->pengajuan->get_IdPKPP($id);
+		echo json_encode($data);
+	}
 
-// 		if(($vPencabutan == 0) && ($vKeputusan == 0)) 
-// 		{	
-// 			session()->setFlashData('warning','Closing gagal ! Silahkan melakukan Pencabutan atau Keputusan !');
-// 			return redirect()->to(base_url('pengajuan/detail_pengajuan/'.$id));
-// 		}else{
+	// 4. Edit modal Surat Tugas
+	public function EditST()
+	{
+		$id = service('request')->getPost('id');
+		//print_r($id);
+		$data = $this->pengajuan->get_IdST($id);
+		echo json_encode($data);
+	}
+	public function EditFM()
+	{
+		$id = service('request')->getPost('id');
+		//print_r($id);
+		$data = $this->pengajuan->get_IdFM($id);
+		echo json_encode($data);
+	}
 
-// 			$data['ajuanStatusAkhir'] = 'TEPAT WAKTU';
+	public function EditPSKPP()
+	{
+		$id = service('request')->getPost('id');
+		//print_r($id);
+		$data = $this->pengajuan->get_IdPSKPP($id);
+		echo json_encode($data);
+	}
 
-// 			// print_r($data);
-// 			// die();
 
-// 			$this->pengajuan->closepengajuan($data,$id);
-// 			session()->setFlashData('success','Closing berhasil');
-// 			return redirect()->to(base_url('pengajuan/detail_pengajuan/'.$id));
-// 		}
-// // die();		
-// 		// $this->pengajuan->closepengajuan($data);
-// 		// session()->setFlashData('success','Closing berhasil');
-// 		// return redirect()->to(base_url('pengajuan/detail_pengajuan/'.$id));
-// 	}
+	//Update DB
+	//1. Ketetapan Pajak
+	public function UpdateKetetapanPajak()
+	{
+		$id = $this->request->getPost('idKP');
+		$idKPajuanId = $this->request->getPost('idKPajuanId');
+		$table = "KetetapanPajak";
+		$key = 'KPid';
+
+		// Function save
+		$data = [
+			'KPNoKetetapan' 		=> 	$this->request->getPost('no_KP'),
+			'KPTgl' 				=> 	$this->request->getPost('tgl_KP'),
+			'KPNilai' 				=> 	$this->request->getPost('nilai_KP'),
+		];
+
+		// print_r($data);
+		// die();
+
+		$this->pengajuan->UpdateForEditor($table,$data,$key,$id);
+		session()->setFlashData('success','Data Ketetapan Pajak Berhasil di update');
+		return redirect()->to(base_url().'/pengajuan/detail_pengajuan/'.$idKPajuanId);//msh error
+	}
+
+	//2. Update Surat Permohonan WP
+	public function UpdatePWP()
+	{
+		$id = $this->request->getPost('idPWP');
+		$idajuanId = $this->request->getPost('idPWPajuan');
+
+		$table = "permohonanwp";
+		$key = 'PWPid';
+
+		// Function save
+		$data = [
+			'PWPnoSurat' 				=> 	$this->request->getPost('NoPWP'),
+			'PWPtglSurat' 				=> 	$this->request->getPost('TglPWP'),
+			'PWPnoLPAD' 				=> 	$this->request->getPost('NoLPAD'),
+			'PWPtglLPAD' 				=> 	$this->request->getPost('TglLPAD'),
+		];
+
+		// print_r($data);
+		// die();
+
+		$this->pengajuan->UpdateForEditor($table,$data,$key,$id);
+		session()->setFlashData('success','Data Permohonan WP Berhasil di update');
+		return redirect()->to(base_url().'/pengajuan/detail_pengajuan/'.$idajuanId);//msh error
+	}
+
+	//3. Update Surat Permohonan WP
+	public function UpdatePKPP()
+	{
+		$id = $this->request->getPost('idPKPP');
+		$idajuanId = $this->request->getPost('idPKPPajuan');
+
+		$table = "pengantarkpp";
+		$key = 'PKPPid';
+		$title = 'Pengantar KPP';
+
+		// Function save
+		$data = [
+			'PKPPnoSurat' 				=> 	$this->request->getPost('no_SP'),
+			'PKPPtglSurat' 				=> 	$this->request->getPost('tgl_SP'),
+			'PKPPtglDiterima' 			=> 	$this->request->getPost('tgl_TerimaK'),
+		];
+
+		// print_r($data);
+		// die();
+
+		$this->pengajuan->UpdateForEditor($table,$data,$key,$id);
+		session()->setFlashData('success','Data '.$title.' Berhasil di update');
+		return redirect()->to(base_url().'/pengajuan/detail_pengajuan/'.$idajuanId);//msh error
+	}
+
+	//4. Update Surat Tugas
+	public function UpdateST()
+	{
+		$id = $this->request->getPost('idST');
+		$idajuanId = $this->request->getPost('idSTajuan');
+
+		$table = "surattugas";
+		$key = 'STid ';
+		$title = 'Surat Tugas';
+
+		// Function save
+		$data = [
+			'STnoSurat' 			=> 	$this->request->getPost('no_ST'),
+			'STtglSurat' 			=> 	$this->request->getPost('tgl_ST'),
+			//'STPenelaah' 			=> 	$this->request->getPost('tgl_TerimaK'),
+		];
+
+		// print_r($data);
+		// die();
+
+		$this->pengajuan->UpdateForEditor($table,$data,$key,$id);
+		session()->setFlashData('success','Data '.$title.' Berhasil di update');
+		return redirect()->to(base_url().'/pengajuan/detail_pengajuan/'.$idajuanId);//msh error
+	}
+
+	//5. Update Formal Matrix
+	public function UpdateFM()
+	{
+		$id = $this->request->getPost('idFM');
+		$idajuanId = $this->request->getPost('idFMajuan');
+
+		$table = "formatmatrik";
+		$key = 'FMid';
+		$title = 'Formal Matrik';
+
+		// Function save
+		$data = [
+			'FMisFormal' 			=> 	$this->request->getPost('formal_Ya'),
+			'FMtglMatrik' 			=> 	$this->request->getPost('tgl_matrix'),
+			//'STPenelaah' 			=> 	$this->request->getPost('tgl_TerimaK'),
+		];
+
+		// print_r($data);
+		// die();
+
+		$this->pengajuan->UpdateForEditor($table,$data,$key,$id);
+		session()->setFlashData('success','Data '.$title.' Berhasil di update');
+		return redirect()->to(base_url().'/pengajuan/detail_pengajuan/'.$idajuanId);//msh error
+	}
+	
+	//6. Update Permintaan Surat Ke KPP
+	public function updatePSKPP()
+	{
+		$id = $this->request->getPost('idPSKPP');
+		$idajuanId = $this->request->getPost('idPSKPPajuan');
+
+		$table = "permintaansuratkpp";
+		$key = 'PSKPPid';
+		$title = 'Permintaan Surat KPP';
+
+		// Function save
+		$data = [
+			'PSKPPNoSurat' 			=> 	$this->request->getPost('vPSKPPNoSurat'),
+			'PSKPPtglSurat' 		=> 	$this->request->getPost('vPSKPPtglSurat'),
+		];
+
+		// print_r($data);
+		// die();
+
+		$this->pengajuan->UpdateForEditor($table,$data,$key,$id);
+		session()->setFlashData('success','Data '.$title.' Berhasil di update');
+		return redirect()->to(base_url().'/pengajuan/detail_pengajuan/'.$idajuanId);//msh error
+	}
+
+
+
+
 
 	public function update()
 	{

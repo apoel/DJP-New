@@ -242,16 +242,17 @@
             <button class="btn btn-primary btn-success dropdown-toggle" type="button" id="dropdownMenuButton"   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             <?php
               //if close
-              $session = session();
-              if($session->get('PENUserLevel')=="Level 2" OR $session->get('PENUserLevel')=="Level 3"){
-                  echo "disabled";
-              }elseif($detail_pengajuansub['ajuanStatusAkhir'] != ""){
-                  echo "disabled";
-              }
-                
-              // if($detail_pengajuansub['ajuanStatusAkhir'] != ""){
+              // $session = session();
+              // if($session->get('PENUserLevel')=="Level 2" OR $session->get('PENUserLevel')=="Level 3"){
+              //     echo "disabled";
+              // }elseif($detail_pengajuansub['ajuanStatusAkhir'] != ""){
               //     echo "disabled";
               // }
+              
+                
+              if($detail_pengajuansub['ajuanStatusAkhir'] != ""){
+                  echo "disabled";
+              }
             ?>
             >
               <i class="fas fa-cog"></i> Manage
@@ -704,11 +705,12 @@
                 <div class="form-group row">
                     <label class="col-sm-5 col-form-label">Arsip</label>
                     <div class="col-md-7">
-                    <select class="form-control" name="arsip" id="arsip" required>
-                            <option value="">No Seletected</option>
-                            <option value="Clear">Clear</option>
-                            <option value="On Progress">On Progress</option>
-                        </select>
+                        <select class="form-control" name="arsip" id="id_arsip" required>
+                            <option value="">No Selected</option>
+                            <?php foreach($list_arsip as $row) {?>
+                            <option value="<?=$row['SUBArsipName'] ?>"> <?= $row['SUBArsipName'] ?></option>
+                            <?php }?>
+                        </select> 
                     </div>
                 </div>
 

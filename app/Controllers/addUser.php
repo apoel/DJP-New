@@ -28,15 +28,15 @@ class addUser extends Controller
 		$data['tingkat_level'] = $model->get_tingkatLevel()->getResult();
 
 
-		if($session->get('PENUserLevel')!="Level 2"){
-			session()->setFlashData('warning','Anda tidak punya hak akses');
-			return redirect()->to(base_url().'/dashboard');
-		}else{
-			 return view('users/v_users',$data);
-		}
+		// if($session->get('PENUserLevel')!="Level 2"){
+		// 	session()->setFlashData('warning','Anda tidak punya hak akses');
+		// 	return redirect()->to(base_url().'/dashboard');
+		// }else{
+		// 	 return view('users/v_users',$data);
+		// }
 
         //print_r($data);
-		//return view('users/v_users',$data);
+		return view('users/v_users',$data);
 	}
 	
 	public function viewDepartemen() {
@@ -44,15 +44,16 @@ class addUser extends Controller
 		$data['full_name'] = $session->get('PENama');
 		$data['icon'] = 'ion ion-home';
 		$data['title'] = 'Manage Jenis Pajak';
-
+		
 		$data['listdepartemen'] = $this->user->getListDepartmen()->getResult();
 
-		if($session->get('PENUserLevel')!="Level 2"){
-			session()->setFlashData('warning','Anda tidak punya hak akses');
-			return redirect()->to(base_url().'/dashboard');
-		}else{
-			 return view('users/v_departemen',$data);
-		}
+		// if($session->get('PENUserLevel')!="Level 2"){
+		// 	session()->setFlashData('warning','Anda tidak punya hak akses');
+		// 	return redirect()->to(base_url().'/dashboard');
+		// }else{
+		// 	 return view('users/v_departemen',$data);
+		// }
+		return view('users/v_departemen',$data);
 	}
 
 	public function saveUser()
@@ -101,11 +102,11 @@ class addUser extends Controller
 			'PENUserLevel'			=> 	$this->request->getPost('group_level'),
 			'PENisAktif'			=> 	$this->request->getPost('isActive'),
 		];
-		print_r($data);
-		die();
-		// $this->user->UpdateUser($data,$id);
-		// session()->setFlashData('success','User Berhasil di update');
-		// return redirect()->to(base_url().'/addUser');
+		// print_r($data);
+		// die();
+		$this->user->UpdateUser($data,$id);
+		session()->setFlashData('success','User Berhasil di update');
+		return redirect()->to(base_url().'/addUser');
 	}
 
 	//Reset Password

@@ -37,14 +37,7 @@
     </div>
     <div class="container">
         <p>
-            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#ModalAddUser"
-            <?php 
-            $session = session();
-            if($session->get('PENUserLevelNama')=='Level 2'){
-                echo "disabled";
-            }
-            ?>
-            ><i class="fas fa-plus-circle"></i>
+            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#ModalAddUser"><i class="fas fa-plus-circle"></i>
               Tambah User
             </button>
         </p>
